@@ -24,10 +24,10 @@ BuildLog.htm
 #dir
 .svn/*
 /.svn/
-/.sample/
-/.unuse_ctrl/
-/.other_unuse/
-other_res/*
+sample
+unuse_ctrl
+.svn
+other_unuse
 Debug
 Release
 Rundir
