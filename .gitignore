@@ -10,3 +10,26 @@
 *.lai
 *.la
 *.a
+
+#compile temp file
+*.ncb
+*.obj
+*.pdb
+*.idb
+*.ilk
+*.exp
+*.user
+BuildLog.htm
+
+#dir
+.svn/*
+/.svn/
+.Rundir/*
+/.Rundir/
+/.unuse_ctrl/
+/.other_unuse/
+other_res/*
+Debug
+Release
+Rundir
+*.vcproject.*
