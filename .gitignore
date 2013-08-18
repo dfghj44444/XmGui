@@ -24,8 +24,7 @@ BuildLog.htm
 #dir
 .svn/*
 /.svn/
-.Rundir/*
-/.Rundir/
+/.sample/
 /.unuse_ctrl/
 /.other_unuse/
 other_res/*
