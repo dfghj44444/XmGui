@@ -35,7 +35,10 @@ struct FontVertex
     };
 };
 
-#define FONT_TEXTURE_SIZE (256)
+// 包含配置文件
+#include "../../include/XmGuiConfig.h"
+
+#define FONT_TEXTURE_SIZE XMGUI_FONT_TEXTURE_SIZE
 class CFontTexture
 {
 public:
@@ -110,7 +113,7 @@ private:
     std::vector<CFontTexture*> m_TextureSheets;
 };
 
-#define MAX_BATCH_COUNT (1024)
+#define MAX_BATCH_COUNT XMGUI_MAX_BATCH_COUNT
 class CFontRenderBatcher
 {
     struct CharMarker

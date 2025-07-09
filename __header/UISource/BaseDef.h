@@ -7,11 +7,13 @@ file : XM_Base.h
 #ifndef H_XM_BASEFILES_H
 #define H_XM_BASEFILES_H
 
-#define H_DEF_VECTORT_BASESIZE_H			8
-//#define H_DEF_RTTINODENAME_LENGTH			128
-#define H_DEF_LEAKCHECKNAME_LENGTH			256
+// 包含配置文件
+#include "../../include/XmGuiConfig.h"
 
-#define	H_DEF_UNDO_LEVEL_DEFAULT			4096
+// 使用配置文件中的值替代硬编码常量
+#define H_DEF_VECTORT_BASESIZE_H			XMGUI_VECTOR_BASE_SIZE
+#define H_DEF_LEAKCHECKNAME_LENGTH			XMGUI_LEAK_CHECK_NAME_LENGTH
+#define	H_DEF_UNDO_LEVEL_DEFAULT			XMGUI_UNDO_LEVEL_DEFAULT
 
 typedef enum UI_CONTROL_STATE
 {
@@ -66,11 +68,12 @@ inline float clampf(float x, float min, float max)
 	return (x < min) ? min : (x > max) ? max : x;
 }
 
-#define _SCREEN_WIDTH	(1024)
-#define _SCREEN_HEIGHT	(768)
-#define _SCREEN_BPP     (32)
+// 使用配置文件中的屏幕设置
+#define _SCREEN_WIDTH	XMGUI_GET_SCREEN_WIDTH()
+#define _SCREEN_HEIGHT	XMGUI_GET_SCREEN_HEIGHT()
+#define _SCREEN_BPP     XMGUI_GET_CONFIG().screenBPP
 
-// WCHAR - > char ��ȯ
+// WCHAR - > char ��ȯ
 inline char* WcharToChar(const wchar_t* pwstrSrc)
 {
 	//XM_ASSERT(pwstrSrc);

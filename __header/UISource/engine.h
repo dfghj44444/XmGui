@@ -28,7 +28,7 @@ class xmEngine : public baseNode
 	//===================================================================================================
 	#if defined(_DEBUG)||defined(DEBUG)
 	protected:
-		xmPtrNameMap				m_ptrMap;//UI ½áµãmap£¬ÓÃÀ´¼ì²éÄÚ´æĞ¹Â¶
+		xmPtrNameMap				m_ptrMap;//UI ï¿½ï¿½ï¿½mapï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½Ğ¹Â¶
 	public:
 		void						setLeakFilename(WCHAR* filename);//waiting for implement
 		const CStringW&				getLeakFilename();//waiting for implement
@@ -135,7 +135,7 @@ class xmEngine : public baseNode
 	// StringTable
 	public:
 		int							m_nStringCnt;
-		TCHAR**						m_ppString;//´ÓbinÎÄ¼ş¶ÁÈ¡µÄÄÚÈİ
+		TCHAR**						m_ppString;//ï¿½ï¿½binï¿½Ä¼ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		bool						InitStringTable(void);
 		void						RemoveStringTable(void);
 		TCHAR*						GetString( int nIdx );
@@ -153,14 +153,18 @@ class xmEngine : public baseNode
 #define g_pStaticTimer				g_pStaticEngine->getTimer()
 #define g_pStaticDevice             g_pStaticEngine->getDevice()
 
+// åŒ…å«é…ç½®æ–‡ä»¶
+#include "../../include/XmGuiConfig.h"
+
+// ä½¿ç”¨é…ç½®æ–‡ä»¶ä¸­çš„æœ¬åœ°åŒ–è®¾ç½®
 #define _LANG_CHINA
 
 #if defined( _LANG_CHINA )				
-	#define _FONT_NAME_		_T("Î¢ÈíÑÅºÚ")
+	#define _FONT_NAME_		XMGUI_GET_FONT_NAME()
 #endif
 
 #if defined( _LANG_CHINA )	
-	#define CODE_PAGE	936 
+	#define CODE_PAGE	XMGUI_DEFAULT_CODEPAGE
 #endif
 
 #endif // H_XM_ENGINEBASE_H
