@@ -35,7 +35,6 @@ file : XM_ASSERT.h
 #if defined(_DEBUG)||defined(DEBUG)
 namespace XM
 {
-	typedef std::map<void*, CStringW> xmPtrNameMap;
 	void							addPtrMap(void* pPtr, CStringW strCreationInfo, long lineNum);
 	void							addPtrMap(void* pPtr, CStringW strCreationInfo, long lineNum, CStringW strSaveFilename );
 	void							removePtrMap(void* pPtr);

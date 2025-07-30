@@ -10,6 +10,7 @@ file : XM_UI_Control.h
 namespace XM
 {
     class UI_Box;
+    class UI_Rect;
 	class UI_Widget : public UI_Object
 	{
 		XM_RTTI_DECLARE_STATIC
@@ -21,40 +22,41 @@ namespace XM
 		xmVec<UI_Rect*>			m_listRect;
 		int						m_nSuperID;
 		bool					m_bChangeAlpha;
+        fontNode*               m_pFontNode;
 
-	protected:
+    protected:
 		// control state
-		virtual void			updateControlState();
+        void			updateControlState() override;
 	public:
 		// ctor/dtor
 		UI_Widget();
-		virtual ~UI_Widget();
+        ~UI_Widget() override;
 		// serialize
-		virtual bool			saveFile(IStream& rStream);
-		virtual bool			loadFile(IStream& rStream);
-		virtual void			render( IDirect3DDevice9* pd3dDevice);
-		virtual void			frameMove( DWORD dwElapsedTime );
+        bool			saveFile(IStream& rStream) override;
+        bool			loadFile(IStream& rStream) override;
+        void			render( IDirect3DDevice9* pd3dDevice) override;
+        void			frameMove( DWORD dwElapsedTime ) override;
 		void					clear();
 
-		bool					getMousePressed() const    { return m_bPressed;  };
+		bool					getMousePressed() const    { return m_bPressed;  }
 
 		int						DivideString(CHAR* lpszSrc, int nBytePerLine, LPTSTR* alpszDst);
 				
 		// UIManager ID
-		virtual void			setSuperID(int nID) { m_nSuperID =  nID; };	
+        void			setSuperID(int nID) override { m_nSuperID =  nID; }
 		// control id
-		void					setID(int nID){	m_nID =  nID; };	
+		void					setID(int nID) override {	m_nID =  nID; }	
 		// hit-test
 		void					setHitTest(bool bFlag);
-		inline bool	const		getHitTest() const { return m_bHitTest;};
-		virtual void			updatePosition();
+		inline bool getHitTest() const { return m_bHitTest;}
+        void			updatePosition() override;
 
 
 		// control state
 		STATUSUI_CONTROL_STATE	getControlState() const;
 
 		// set/change font
-		virtual bool			setFont(const WCHAR* strFontname, int nFontHeight, int nFontWeight, BOOL bItalic = false);
+		virtual bool			setFont(const WCHAR* strFontName, int nFontHeight, int nFontWeight, BOOL bItalic = false);
 		virtual void			setFont(fontNode* pFontNode);
 		fontNode*				getFont();
 
@@ -72,15 +74,15 @@ namespace XM
 
 		// init/refresh
 		virtual HRESULT			onInit();
-		virtual void			refresh();
+        void			refresh() override;
 
 		// hit test
-		virtual UI_Object* hitTest(int nMouseX, int nMouseY, float& zDist);
+        UI_Object* hitTest(int nMouseX, int nMouseY, float& zDist) override;
 
 		// message handler
-		virtual bool			handleKeyboard(UI_Manager* pDialog, UINT uMsg, WPARAM wParam, LPARAM lParam);
-		virtual bool			handleMouse(UI_Manager* pDialog, UINT uMsg, WPARAM wParam, LPARAM lParam);
-		virtual bool			msgProc(UI_Manager* pDialog, UINT uMsg, WPARAM wParam, LPARAM lParam);
+        bool			handleKeyboard(UI_Manager* pDialog, UINT uMsg, WPARAM wParam, LPARAM lParam) override;
+        bool			handleMouse(UI_Manager* pDialog, UINT uMsg, WPARAM wParam, LPARAM lParam) override;
+        bool			msgProc(UI_Manager* pDialog, UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 
 		bool					getChangeAlpah();
 		void					setChangeAlpha(bool bChange);

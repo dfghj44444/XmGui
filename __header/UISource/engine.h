@@ -4,6 +4,7 @@ file : XM_Engine.h
 
 */
 
+#include <Dimm.h>
 #ifndef H_XM_ENGINEBASE_H
 #define H_XM_ENGINEBASE_H
 
@@ -19,7 +20,7 @@ class xmEngine : public baseNode
 	// ctor/dtor
 	public:
 		xmEngine();
-		virtual ~xmEngine();
+    ~xmEngine() override;
 	//===================================================================================================
 	protected:
 		static xmEngine*			ms_xmEngineInstance;
@@ -28,12 +29,12 @@ class xmEngine : public baseNode
 	//===================================================================================================
 	#if defined(_DEBUG)||defined(DEBUG)
 	protected:
-		xmPtrNameMap				m_ptrMap;//UI ���map����������ڴ�й¶
+		std::map<void*, CStringW>	m_ptrMap;//UI ���map����������ڴ�й¶
 	public:
 		void						setLeakFilename(WCHAR* filename);//waiting for implement
 		const CStringW&				getLeakFilename();//waiting for implement
-		void						addPtr(void* pPtr, CStringW strFilename, long lineNum);
-		void						addPtr(void* pPtr, CStringW strFilename, long lineNum, CStringW strSaveFilename );
+		void						addPtr(void* pPtr, const CStringW& strFilename, long lineNum);
+		void						addPtr(void* pPtr, const CStringW& strFilename, long lineNum, const CStringW& strSaveFilename );
 		void						removePtr(void* pPtr);
 		void						printPtrList();
 	#endif
@@ -41,7 +42,7 @@ class xmEngine : public baseNode
 	//===================================================================================================
 	protected:
 		IDirect3DDevice9*			m_pDevice;
-		listResNode					m_listDeviceData;
+		xmVec<resNode*>					m_listDeviceData;
 
 	public:
 		inline IDirect3DDevice9*	getDevice() const {return m_pDevice;};
@@ -53,12 +54,12 @@ class xmEngine : public baseNode
 		void						onDestroyDevice();
 	//===================================================================================================
 	protected:
-		texMgr						m_TexManager;
-        typedef stdext::hash_map<std::wstring, texNode*> TexMap;
+		texMgr						m_texManager;
+        typedef std::unordered_map<std::wstring, texNode*> TexMap;
 		TexMap						m_listTexNode;
 
 	public:
-		inline texMgr*				getTexManager(){ return &m_TexManager; };
+		texMgr*				        getTexManager(){ return &m_texManager; };
 		void						addTexNode(WCHAR* strTex, texNode* pNode);
 		void						removeTexNode(WCHAR* strTex);
 		texNode*					getTexNode(WCHAR* strTex);
@@ -74,7 +75,7 @@ class xmEngine : public baseNode
 		xmTimer						m_Timer;
 
 	public:
-		inline xmTimer*				getTimer()  {	return &m_Timer; };
+        xmTimer*				getTimer()  {	return &m_Timer; };
 	//===================================================================================================
 	// IMM
 	protected:
@@ -125,10 +126,10 @@ class xmEngine : public baseNode
 	public:
 		void						clearPathList();
 		xmVec<CStringW>*			getPathList();
-		void						addFilePath(CStringW strPath);
+		void						addFilePath(const CStringW& strPath);
 		void						addFilePath(WCHAR* strPath);
 		void						addFilePath(char* strPath);
-		void						removeFilePath(CStringW strPath);
+		void						removeFilePath(const CStringW& strPath);
 		void						removeFilePath(WCHAR* strPath);
 		void						removeFilePath(char* strPath);
 	//===================================================================================================

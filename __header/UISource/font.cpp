@@ -52,11 +52,11 @@ void CFontTexture::AddBitmap(const CharInfo& ci, const unsigned char* bmp, unsig
     {
         for(unsigned int x = 0; x < ci.width; ++x)
         {
-            c = unsigned int(bmp[y * rowStride + x]) << 2;
+            c = static_cast<unsigned int>(bmp[y * rowStride + x]) << 2;
             if( c > 255 )
                 c = 255;
 
-            m_BMP[(ci.yOffset + y)*FONT_TEXTURE_SIZE + (ci.xOffset + x)] = unsigned char(c);
+            m_BMP[(ci.yOffset + y)*FONT_TEXTURE_SIZE + (ci.xOffset + x)] = static_cast<unsigned char>(c);
         }
     }
 }
@@ -125,28 +125,28 @@ INT CFont::DrawTextW(LPD3DXSPRITE pSprite, LPCWSTR pString, INT Count, LPRECT pR
     int y = pRect->top;
     if (Format & DT_VCENTER)
     {
-        y = pRect->top + int(height - startLineOffset.size() * GetHeight())/2;
+        y = pRect->top + static_cast<int>(height - startLineOffset.size() * GetHeight())/2;
     }
     else if (Format & DT_BOTTOM)
     {
-        y = pRect->top + int(height - startLineOffset.size() * GetHeight());
+        y = pRect->top + static_cast<int>(height - startLineOffset.size() * GetHeight());
     }
 
     wchar_t c;
     g_FontRenderBatcher->Begin(this);
-    for(unsigned int i = 0; i < startLineOffset.size() && LONG(y + 4) < pRect->bottom; ++i, y += GetHeight())
+    for(unsigned int i = 0; i < startLineOffset.size() && static_cast<LONG>(y + 4) < pRect->bottom; ++i, y += GetHeight())
     {
         int x = pRect->left;
         if (Format & DT_CENTER)
         {
-            x = pRect->left + int(width - GetStrWidth(pString + startLineOffset[i], lineLen[i]))/2;
+            x = pRect->left + static_cast<int>(width - GetStrWidth(pString + startLineOffset[i], lineLen[i]))/2;
         }
         else if (Format & DT_RIGHT)
         {
-            x = pRect->left + int(width - GetStrWidth(pString + startLineOffset[i], lineLen[i]));
+            x = pRect->left + static_cast<int>(width - GetStrWidth(pString + startLineOffset[i], lineLen[i]));
         }
 
-        for(unsigned int j = 0; j < lineLen[i] && LONG(x + 4) < pRect->right; ++j)
+        for(unsigned int j = 0; j < lineLen[i] && static_cast<LONG>(x + 4) < pRect->right; ++j)
         {
             c = *(pString + startLineOffset[i] + j);
             if( c != L'\t' )
@@ -257,7 +257,7 @@ bool CFont::LoadCharInfo(wchar_t c)
         ci.height = metrics.gmBlackBoxY;
         ci.xOrigin = metrics.gmptGlyphOrigin.x;
         ci.yOrigin = metrics.gmptGlyphOrigin.y;
-        ci.xIncrement = (unsigned int)metrics.gmCellIncX;
+        ci.xIncrement = static_cast<unsigned int>(metrics.gmCellIncX);
 
         AddBitmap(ci, scratchPad, rowStride);
     }
@@ -618,10 +618,10 @@ void CFontRenderBatcher::End(bool flush)
             drawY = m.y + m_pFont->GetBaseline() - ci.yOrigin * TEXT_MAG;
             drawX = m.x + ci.xOrigin;
 
-            texLeft   = (float)(ci.xOffset)             / float(FONT_TEXTURE_SIZE);
-            texRight  = (float)(ci.xOffset + ci.width)  / float(FONT_TEXTURE_SIZE);
-            texTop    = (float)(ci.yOffset)             / float(FONT_TEXTURE_SIZE);
-            texBottom = (float)(ci.yOffset + ci.height) / float(FONT_TEXTURE_SIZE);
+            texLeft   = static_cast<float>(ci.xOffset)             / static_cast<float>(FONT_TEXTURE_SIZE);
+            texRight  = static_cast<float>(ci.xOffset + ci.width)  / static_cast<float>(FONT_TEXTURE_SIZE);
+            texTop    = static_cast<float>(ci.yOffset)             / static_cast<float>(FONT_TEXTURE_SIZE);
+            texBottom = static_cast<float>(ci.yOffset + ci.height) / static_cast<float>(FONT_TEXTURE_SIZE);
 
             screenLeft   = drawX - fillConventionOffset;
             screenRight  = drawX - fillConventionOffset + ci.width * TEXT_MAG;
@@ -712,8 +712,8 @@ int CFontRenderBatcher::QueueChar(wchar_t c, int x, int y, unsigned int color)
         sm.numChars++;
 
         m.c = c;
-        m.x = (float)x;
-        m.y = (float)y;
+        m.x = static_cast<float>(x);
+        m.y = static_cast<float>(y);
         m.color = color;
 
         ++m_BatchCount;

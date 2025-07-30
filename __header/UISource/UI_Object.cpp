@@ -29,7 +29,7 @@ MA 02110-1301, USA., or go to http://www.gnu.org/copyleft/lesser.txt
 ***********************************************************************/
 
 #include "stdafx.h"
-
+ 
 namespace XM
 {
 	// RTTI
@@ -85,4 +85,107 @@ namespace XM
 	
 		return true;
 	}
+
+    void UI_Object::frameMove(DWORD dwElapsedTime)
+    {
+	  // Update logic here, if needed
+      // For example, update position based on elapsed time or other factors
+      // Placeholder logic for frame move
+      m_vPos.x += 0.01f * dwElapsedTime; // Example: move right over time
+      m_vPos.y += 0.01f * dwElapsedTime; // Example: move down over time
+    }
+
+    void UI_Object::render(IDirect3DDevice9*)
+    {
+	  // Render logic here, if needed
+      // For example, draw the object at its current position
+      // Placeholder logic for rendering
+      // This could involve drawing a rectangle or other shape at m_vPos
+      // using Direct3D functions, but is left empty for now.
+    }
+
+    UI_Object* UI_Object::hitTest(int nMouseX, int nMouseY, float& zDist)
+    {
+      if (!m_bVisible || !m_bEnabled || !m_bUseMouse)
+        return nullptr;
+      // Perform hit test logic here
+      // For example, check if the mouse coordinates are within the bounds of this object
+      // If hit, set zDist to the appropriate value and return this object
+      // Placeholder logic for hit test
+      if (nMouseX >= m_vPos.x && nMouseX <= m_vPos.x + 100 && // Assuming width of 100
+        nMouseY >= m_vPos.y && nMouseY <= m_vPos.y + 50)   // Assuming height of 50
+      {
+        zDist = m_vPos.z; // Set zDist to object's z position
+        return this; // Hit detected, return this object
+      }
+      return nullptr; // No hit detected
+    }
+
+    void UI_Object::setID(int iId)
+    {
+      m_nID = iId;
+    }
+
+    void UI_Object::setSuperID(int nId)
+    {
+      m_nSuperID = nId;
+    }
+
+    bool UI_Object::handleKeyboard(UI_Manager* pDialog, UINT uMsg, WPARAM wParam, LPARAM lParam)
+    {
+      if (!m_bVisible || !m_bEnabled || !m_bUseKeyboard)
+        return false;
+      if (pDialog == nullptr)
+        return false;
+      // handle keyboard messages here
+      // ...
+      return false; // return true if the message was handled
+    }
+
+    bool UI_Object::handleMouse(UI_Manager* pDialog, UINT uMsg, WPARAM wParam, LPARAM lParam)
+    {
+      if (!m_bVisible || !m_bEnabled || !m_bUseMouse)
+        return false;
+      if (pDialog == nullptr)
+        return false;
+      // handle mouse messages here
+      // ...
+      return false; // return true if the message was handled
+    }
+
+    void UI_Object::refresh()
+    {
+      m_bMouseOver = false;
+      m_bHasFocus = false;
+      m_bPressed = false;
+      // Reset other states if necessary
+    }
+
+    bool UI_Object::msgProc(UI_Manager* pDialog, UINT uMsg, WPARAM wParam, LPARAM lParam)
+    {
+      if (pDialog == nullptr)
+        return false;
+      // Handle messages here
+      switch (uMsg)
+      {
+      case WM_MOUSEMOVE:
+        // Handle mouse move
+        break;
+      case WM_LBUTTONDOWN:
+        // Handle left button down
+        break;
+      case WM_LBUTTONUP:
+        // Handle left button up
+        break;
+      case WM_RBUTTONDOWN:
+        // Handle right button down
+        break;
+      case WM_RBUTTONUP:
+        // Handle right button up
+        break;
+      default:
+        return false; // Not handled
+      }
+      return true; // Message handled
+    }
 }

@@ -158,10 +158,10 @@ namespace XM
 			return;
 
 		RECT rc;
-		rc.left = (int)m_Vertices[0].x;
-		rc.right = (int)m_Vertices[1].x;
-		rc.top = (int)m_Vertices[0].y;
-		rc.bottom = (int)m_Vertices[3].y;
+		rc.left = static_cast<int>(m_Vertices[0].x);
+		rc.right = static_cast<int>(m_Vertices[1].x);
+		rc.top = static_cast<int>(m_Vertices[0].y);
+		rc.bottom = static_cast<int>(m_Vertices[3].y);
 		if(m_bUseBackgroundColor == true)
 		{
 			renderRect_VTXTYPE_2D_COLOR(rc, m_colorBackground, m_Vertices[0].z, pDevice);
@@ -177,8 +177,8 @@ namespace XM
 
 		if(m_bTextMarginFirst == false)
 		{
-			int nRectWidth = (int)m_vSize.x;
-			int nRectHeight = (int)m_vSize.y;
+			int nRectWidth = static_cast<int>(m_vSize.x);
+			int nRectHeight = static_cast<int>(m_vSize.y);
 			rc.bottom = rc.top + nRectHeight;
 			int nTextWidth = m_pFontNode->getCreationParam()->Width;
 			int nTextHeight= m_pFontNode->getCreationParam()->Height;
@@ -200,9 +200,9 @@ namespace XM
 		else
 		{
 			rc.left		= m_uMarginH;
-			rc.right	= rc.left + (int)m_vSize.x;
+			rc.right	= rc.left + static_cast<int>(m_vSize.x);
 			rc.top		= m_uMarginV;
-			rc.bottom	= rc.top + (int)m_vSize.y;
+			rc.bottom	= rc.top + static_cast<int>(m_vSize.y);
 		}
 
 		//pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);

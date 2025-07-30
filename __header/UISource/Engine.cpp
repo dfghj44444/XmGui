@@ -12,18 +12,18 @@ namespace XM
 		// IMM
 		initIMM();
 
-		m_nStringCnt = 0;;
-		m_ppString = 0;
+		m_nStringCnt = 0;
+		m_ppString = nullptr;
 
 		// String Table
 		InitStringTable();
-		m_pDevice = 0;
+		m_pDevice = nullptr;
 		// HWND
-		m_hWnd = 0;
+		m_hWnd = nullptr;
 		m_listStatusUIManager.clear();
 		
 		// Modal Dialog
-		m_pModal = 0;
+		m_pModal = nullptr;
 	}
 	xmEngine::~xmEngine()
 	{
@@ -32,21 +32,21 @@ namespace XM
 	}
 
 	///////////////////////////////////////////////////////////////////////////
-	xmEngine* xmEngine::ms_xmEngineInstance = NULL;
+	xmEngine* xmEngine::ms_xmEngineInstance = nullptr;
 	xmEngine* xmEngine::getInstance()
 	{
-        if(ms_xmEngineInstance == NULL)
+        if(ms_xmEngineInstance == nullptr)
             ms_xmEngineInstance = new xmEngine;
 
 		if(ms_xmEngineInstance == (void*)0xFFFFFFFF)
-			return NULL;
+			return nullptr;
 
 		return ms_xmEngineInstance;
 	}
 
 	///////////////////////////////////////////////////////////////////////////
 	#if defined(_DEBUG)||defined(DEBUG)
-	void xmEngine::addPtr(void* pPtr, CStringW strFilename, long lineNum)
+	void xmEngine::addPtr(void* pPtr, const CStringW& strFilename, long lineNum)
 	{
 		char buf[32];
 		_itoa(lineNum, buf, 10);
@@ -57,7 +57,7 @@ namespace XM
 		m_ptrMap[pPtr] = strInsert;
 	}
 
-	void xmEngine::addPtr(void* pPtr, CStringW strFilename, long lineNum, CStringW strSaveFilename )
+	void xmEngine::addPtr(void* pPtr, const CStringW& strFilename, long lineNum, const CStringW& strSaveFilename )
 	{
 		char buf[32];
 		_itoa(lineNum, buf, 10);
@@ -77,15 +77,15 @@ namespace XM
 	}
 	void xmEngine::printPtrList()
 	{
-		int nPtrCount = (int)m_ptrMap.size();
+		int nPtrCount = static_cast<int>(m_ptrMap.size());
 		if(nPtrCount > 0)
 		{
 			FILE* fp = _wfopen(L"leak.txt", L"a");
 			fwprintf(fp, L"%d Leak(s) Founded.\n", nPtrCount);
-			XM::xmPtrNameMap::iterator itMap;
-			for(itMap = m_ptrMap.begin(); itMap != m_ptrMap.end(); itMap++)
+
+			for(auto itMap = m_ptrMap.begin(); itMap != m_ptrMap.end(); ++itMap)
 			{
-				fwprintf(fp, L"Found Leak!!! %s\n", (*itMap).second);
+				fwprintf(fp, L"Found Leak!!! %s\n", itMap->second.GetBuffer());
 			}
 			fwprintf(fp, L"\n");
 			fclose(fp);
@@ -96,21 +96,21 @@ namespace XM
 	void xmEngine::addDeviceData(resNode* pNode)
 	{
 		XM_ASSERT(pNode);
-		if(pNode == 0)
+		if(pNode == nullptr)
 			return;
 		m_listDeviceData.push_back(pNode);
 	}
 	void xmEngine::removeDeviceData(resNode* pNode)
 	{
 		XM_ASSERT(pNode);
-		if(pNode == 0)
+		if(pNode == nullptr)
 			return;
 		m_listDeviceData.remove(pNode);
 	}
 	bool xmEngine::onCreateDevice(IDirect3DDevice9* pDevice)
 	{
 		XM_ASSERT(pDevice);
-		if(pDevice == 0)
+		if(pDevice == nullptr)
 			return false;
 
 		bool bRet = true;
@@ -133,7 +133,7 @@ namespace XM
 	bool xmEngine::onResetDevice(IDirect3DDevice9* pDevice)
 	{
 		XM_ASSERT(pDevice);
-		if(pDevice == 0)
+		if(pDevice == nullptr)
 			return false;
 
 		bool bRet = true;
@@ -160,7 +160,7 @@ namespace XM
 			m_listDeviceData[i]->onDestroyDevice();
 
         m_FontManager.destroy();
-		m_pDevice = 0;
+		m_pDevice = nullptr;
 
         delete ms_xmEngineInstance;
         ms_xmEngineInstance = (xmEngine*)0xFFFFFFFF;
@@ -168,7 +168,7 @@ namespace XM
 
 	void xmEngine::addTexNode(WCHAR* strTex, texNode* pNode)
 	{
-		if((strTex == 0)||(pNode == 0))
+		if((strTex == nullptr)||(pNode == nullptr))
 		{
 			XM_ASSERT(0);
 			return;
@@ -186,7 +186,7 @@ namespace XM
 	
     void xmEngine::removeTexNode(WCHAR* strTex)
 	{
-		if(strTex == 0) 
+		if(strTex == nullptr) 
             return;
 
         wchar_t name[1024];
@@ -199,10 +199,10 @@ namespace XM
 
 	texNode* xmEngine::getTexNode(WCHAR* strTex)
 	{
-		if(strTex == 0)
+		if(strTex == nullptr)
 		{
 			XM_ASSERT(0);
-			return 0;
+			return nullptr;
 		}
 
         wchar_t name[1024];
@@ -214,7 +214,7 @@ namespace XM
         if( itr != m_listTexNode.end() )
             return itr->second;
 
-        return NULL;
+        return nullptr;
 	}
 	///////////////////////////////////////////////////////////////////////////
 	// IMM
@@ -246,29 +246,29 @@ namespace XM
 
 	INPUTCONTEXT* xmEngine::LockIMC(HIMC hImc)
 	{
-		if(_ImmLockIMC != NULL) 
+		if(_ImmLockIMC != nullptr) 
 			return _ImmLockIMC(hImc);
 
-		return NULL;
+		return nullptr;
 	}
 
 	BOOL xmEngine::UnlockIMC(HIMC hImc)
 	{
-		if(_ImmUnlockIMC != NULL) 
+		if(_ImmUnlockIMC != nullptr) 
 			return _ImmUnlockIMC(hImc);
 			
 		return FALSE;
 	}
 	LPVOID xmEngine::LockIMCC(HIMCC himcc)
 	{
-		if(_ImmLockIMCC != NULL) 
+		if(_ImmLockIMCC != nullptr) 
 			return _ImmLockIMCC(himcc);
 
-		return NULL;
+		return nullptr;
 	}
 	BOOL xmEngine::UnlockIMCC(HIMCC himcc)
 	{
-		if(_ImmUnlockIMCC != NULL) 
+		if(_ImmUnlockIMCC != nullptr) 
 			return _ImmUnlockIMCC(himcc);
 
 		return NULL;
@@ -279,7 +279,7 @@ namespace XM
 	void xmEngine::closeEngine()
 	{
 		m_FontManager.clear();
-		m_TexManager.clear();
+		m_texManager.clear();
 
 		if(m_hDllImm32) 
 		{
@@ -390,7 +390,7 @@ namespace XM
 	{
 		return &m_listFilePath;
 	}
-	void xmEngine::addFilePath(CStringW strPath)
+	void xmEngine::addFilePath(const CStringW& strPath)
 	{
 		CStringW strInsert = strPath;
 		int nSize = m_listFilePath.size();
@@ -413,7 +413,7 @@ namespace XM
 		CStringW strInsert = strPath;
 		addFilePath(strInsert);
 	}
-	void xmEngine::removeFilePath(CStringW strPath)
+	void xmEngine::removeFilePath(const CStringW& strPath)
 	{
 		CStringW strDelete = strPath;
 		int nSize = m_listFilePath.size();
@@ -445,11 +445,11 @@ namespace XM
 		HANDLE hFile;
 		SHORT  nStringLenght;
 
-		hFile = CreateFile(_T("TextLib.bin"), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+		hFile = CreateFile(_T("TextLib.bin"), GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
 		
 		if ( hFile == INVALID_HANDLE_VALUE ) {	return FALSE;	}
 
-		ReadFile( hFile, &m_nStringCnt, sizeof(INT), &dwSize, NULL );
+		ReadFile( hFile, &m_nStringCnt, sizeof(INT), &dwSize, nullptr);
 
 		if ( m_nStringCnt )
 		{
@@ -457,15 +457,15 @@ namespace XM
 
 			for ( INT i = 0; i < m_nStringCnt; ++i )
 			{
-				ReadFile( hFile, &nStringLenght, sizeof(SHORT), &dwSize, NULL );
+				ReadFile( hFile, &nStringLenght, sizeof(SHORT), &dwSize, nullptr);
 
-				m_ppString[i] = NULL;
+				m_ppString[i] = nullptr;
 
 				if ( nStringLenght )
 				{
 					m_ppString[i] = (TCHAR*) new TCHAR[ nStringLenght + 1 ];
 
-					ReadFile( hFile, m_ppString[i], sizeof(TCHAR) * nStringLenght, &dwSize, NULL );
+					ReadFile( hFile, m_ppString[i], sizeof(TCHAR) * nStringLenght, &dwSize, nullptr);
 
 					m_ppString[i][ nStringLenght ] = '\0';
 				}

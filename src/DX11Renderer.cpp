@@ -37,21 +37,21 @@ private:
 public:
     DX11Texture() : m_width(0), m_height(0), m_isValid(false) {}
 
-    virtual int GetWidth() const override { return m_width; }
-    virtual int GetHeight() const override { return m_height; }
-    virtual bool IsValid() const override { return m_isValid; }
+    int GetWidth() const override { return m_width; }
+    int GetHeight() const override { return m_height; }
+    bool IsValid() const override { return m_isValid; }
 
-    virtual bool LoadFromFile(const std::wstring& filename) override {
+    bool LoadFromFile(const std::wstring& filename) override {
         // 简化实现 - 需要WIC或其他图像加载库
         return false;
     }
 
-    virtual bool LoadFromMemory(const void* data, size_t size) override {
+    bool LoadFromMemory(const void* data, size_t size) override {
         // 简化实现
         return false;
     }
 
-    virtual bool CreateEmpty(int width, int height) override {
+    bool CreateEmpty(int width, int height) override {
         auto device = GetDevice();
         if (!device) return false;
 
@@ -78,7 +78,7 @@ public:
         return false;
     }
 
-    virtual bool UpdateData(const void* data, int width, int height) override {
+    bool UpdateData(const void* data, int width, int height) override {
         auto context = GetContext();
         if (!context || !m_pTexture || !data) return false;
 
@@ -86,9 +86,9 @@ public:
         return true;
     }
 
-    virtual void* Lock() override { return nullptr; } // DX11不支持Lock
-    virtual void Unlock() override {} // DX11不支持Unlock
-    virtual void* GetNativeHandle() const override { return m_pSRV.Get(); }
+    void* Lock() override { return nullptr; } // DX11不支持Lock
+    void Unlock() override {} // DX11不支持Unlock
+    void* GetNativeHandle() const override { return m_pSRV.Get(); }
 
 private:
     ID3D11Device* GetDevice();
@@ -130,11 +130,12 @@ private:
 public:
     DX11Renderer() : m_hWnd(nullptr), m_isInitialized(false), m_lastFrameTime(0) {}
 
-    virtual ~DX11Renderer() {
+    ~DX11Renderer() override
+    {
         Shutdown();
     }
 
-    virtual bool Initialize(HWND hWnd, int width, int height, bool fullscreen = false) override {
+    bool Initialize(HWND hWnd, int width, int height, bool fullscreen = false) override {
         m_hWnd = hWnd;
 
         // 创建设备和交换链
@@ -212,7 +213,7 @@ public:
         return true;
     }
 
-    virtual void Shutdown() override {
+    void Shutdown() override {
         m_pDevice.Reset();
         m_pContext.Reset();
         m_pSwapChain.Reset();
@@ -221,11 +222,12 @@ public:
         m_isInitialized = false;
     }
 
-    virtual bool IsInitialized() const override { return m_isInitialized; }
+    bool IsInitialized() const override { return m_isInitialized; }
 
-    virtual bool OnDeviceLost() override { return true; }
-    virtual bool OnDeviceReset() override { return true; }
-    virtual void OnResize(int width, int height) override {
+    bool OnDeviceLost() override { return true; }
+    bool OnDeviceReset() override { return true; }
+
+    void OnResize(int width, int height) override {
         if (!m_pSwapChain) return;
         
         m_pContext->OMSetRenderTargets(0, nullptr, nullptr);
@@ -246,13 +248,13 @@ public:
         SetViewport(m_viewport);
     }
 
-    virtual void BeginFrame() override {
+    void BeginFrame() override {
         if (!m_pContext) return;
         m_stats.Reset();
         m_lastFrameTime = GetTickCount();
     }
 
-    virtual void EndFrame() override {
+    void EndFrame() override {
         if (!m_pContext) return;
         DWORD currentTime = GetTickCount();
         m_stats.frameTime = (currentTime - m_lastFrameTime) / 1000.0f;
@@ -260,20 +262,20 @@ public:
         m_stats.frameCount++;
     }
 
-    virtual void Present() override {
+    void Present() override {
         if (m_pSwapChain) {
             m_pSwapChain->Present(0, 0);
         }
     }
 
-    virtual void Clear(const Color& color) override {
+    void Clear(const Color& color) override {
         if (!m_pContext) return;
         float clearColor[4] = { color.r, color.g, color.b, color.a };
         m_pContext->ClearRenderTargetView(m_pRTV.Get(), clearColor);
         m_pContext->ClearDepthStencilView(m_pDSV.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
     }
 
-    virtual void SetViewport(const Viewport& viewport) override {
+    void SetViewport(const Viewport& viewport) override {
         if (!m_pContext) return;
         
         D3D11_VIEWPORT vp = {};
@@ -288,23 +290,24 @@ public:
         m_viewport = viewport;
     }
 
-    virtual Viewport GetViewport() const override { return m_viewport; }
+    Viewport GetViewport() const override { return m_viewport; }
 
-    virtual void SetRenderState(const RenderState& state) override {
+    void SetRenderState(const RenderState& state) override {
         // 设置混合状态等
         m_currentState = state;
     }
 
-    virtual RenderState GetRenderState() const override { return m_currentState; }
-    virtual void PushRenderState() override { m_stateStack.push(m_currentState); }
-    virtual void PopRenderState() override {
+    RenderState GetRenderState() const override { return m_currentState; }
+    void PushRenderState() override { m_stateStack.push(m_currentState); }
+
+    void PopRenderState() override {
         if (!m_stateStack.empty()) {
             SetRenderState(m_stateStack.top());
             m_stateStack.pop();
         }
     }
 
-    virtual void DrawVertices(const Vertex* vertices, int count, ITexture* texture = nullptr) override {
+    void DrawVertices(const Vertex* vertices, int count, ITexture* texture = nullptr) override {
         if (!m_pContext || !vertices || count == 0) return;
 
         // 更新顶点缓冲
@@ -332,12 +335,12 @@ public:
         m_stats.triangleCount += count / 3;
     }
 
-    virtual void DrawIndexed(const Vertex* vertices, int vertexCount, 
+    void DrawIndexed(const Vertex* vertices, int vertexCount, 
                            const uint16_t* indices, int indexCount, ITexture* texture = nullptr) override {
         // 索引绘制实现
     }
 
-    virtual void DrawRectangle(const Rectangle& rect, const Color& color) override {
+    void DrawRectangle(const Rectangle& rect, const Color& color) override {
         Vertex vertices[6] = {
             Vertex(rect.x, rect.y, 0, 0, 0, color.ToARGB()),
             Vertex(rect.x + rect.width, rect.y, 0, 1, 0, color.ToARGB()),
@@ -349,25 +352,25 @@ public:
         DrawVertices(vertices, 6, nullptr);
     }
 
-    virtual void DrawRectangle(const Rectangle& rect, ITexture* texture, 
+    void DrawRectangle(const Rectangle& rect, ITexture* texture, 
                              const Rectangle* sourceRect = nullptr) override {
         // 带纹理的矩形绘制
     }
 
-    virtual void DrawLine(float x1, float y1, float x2, float y2, const Color& color, float width = 1.0f) override {
+    void DrawLine(float x1, float y1, float x2, float y2, const Color& color, float width = 1.0f) override {
         // 线条绘制
     }
 
-    virtual void DrawText(const std::wstring& text, float x, float y, const Color& color, 
-                         ITexture* fontTexture = nullptr) override {
+    void DrawTxt(const std::wstring& text, float x, float y, const Color& color,
+      ITexture* fontTexture = nullptr) override {
         // 文本绘制
     }
 
-    virtual std::shared_ptr<ITexture> CreateTexture() override {
+    std::shared_ptr<ITexture> CreateTexture() override {
         return std::make_shared<DX11Texture>();
     }
 
-    virtual std::shared_ptr<ITexture> LoadTexture(const std::wstring& filename) override {
+    std::shared_ptr<ITexture> LoadTexture(const std::wstring& filename) override {
         auto texture = std::make_shared<DX11Texture>();
         if (texture->LoadFromFile(filename)) {
             return texture;
@@ -375,11 +378,12 @@ public:
         return nullptr;
     }
 
-    virtual std::shared_ptr<IShader> CreateShader() override { return nullptr; }
-    virtual std::shared_ptr<IShader> LoadShader(const std::wstring& filename) override { return nullptr; }
+    std::shared_ptr<IShader> CreateShader() override { return nullptr; }
+    std::shared_ptr<IShader> LoadShader(const std::wstring& filename) override { return nullptr; }
 
-    virtual RendererType GetType() const override { return RendererType::DX11; }
-    virtual RendererCapabilities GetCapabilities() const override {
+    RendererType GetType() const override { return RendererType::DX11; }
+
+    RendererCapabilities GetCapabilities() const override {
         RendererCapabilities caps = {};
         caps.supportsMultisampling = true;
         caps.supportsHDR = true;
@@ -393,19 +397,20 @@ public:
         caps.deviceName = "DirectX 11 Device";
         return caps;
     }
-    virtual RenderStats GetStats() const override { return m_stats; }
-    virtual std::string GetName() const override { return "DirectX 11 Renderer"; }
 
-    virtual void SetTransform(const float* matrix) override {}
-    virtual void PushTransform() override {}
-    virtual void PopTransform() override {}
-    virtual void SetScissorRect(const Rectangle& rect) override {}
-    virtual void DisableScissorRect() override {}
+    RenderStats GetStats() const override { return m_stats; }
+    std::string GetName() const override { return "DirectX 11 Renderer"; }
 
-    virtual void SetDebugName(const std::string& name) override {}
-    virtual void BeginDebugGroup(const std::string& name) override {}
-    virtual void EndDebugGroup() override {}
-    virtual void InsertDebugMarker(const std::string& name) override {}
+    void SetTransform(const float* matrix) override {}
+    void PushTransform() override {}
+    void PopTransform() override {}
+    void SetScissorRect(const Rectangle& rect) override {}
+    void DisableScissorRect() override {}
+
+    void SetDebugName(const std::string& name) override {}
+    void BeginDebugGroup(const std::string& name) override {}
+    void EndDebugGroup() override {}
+    void InsertDebugMarker(const std::string& name) override {}
 
     ID3D11Device* GetDevice() const { return m_pDevice.Get(); }
     ID3D11DeviceContext* GetContext() const { return m_pContext.Get(); }

@@ -21,28 +21,30 @@ MA 02110-1301, USA., or go to http://www.gnu.org/copyleft/lesser.txt
 @Describe:This is a part of XM_GUI
 @Create Date:2010-10-7 14:01:29
 @Version:1.0
-@Author£ºDouble One
-@Blog£º http://onedouble.cnblogs.com
+@AuthorÂ£ÂºDouble One
+@BlogÂ£Âº http://onedouble.cnblogs.com
 @Modifier: Double One (dfghj77777@gmail.com)
-@Modify Date£º2013-08-05 14:01:30
-@Modify Reason£º
+@Modify DateÂ£Âº2013-08-05 14:01:30
+@Modify ReasonÂ£Âº
 ***********************************************************************/
 #include "stdafx.h"
+
+#include <chrono>
 
 namespace XM
 {
 	xmTimer::xmTimer()
-	{
-		m_fNow			= 0.0f;
-		m_fDelta		= 0.0f;
-		m_bTimerInited	= false;
-		m_bPaused		= false;
-	}
-	xmTimer::~xmTimer()
-	{
-	}
+    {
+        m_fNow = 0.0f;
+        m_fDelta = 0.0f;
+        m_bTimerInited = false;
+        m_bPaused = false;
+    }
 
-	float xmTimer::getAbsoluteTime()
+    xmTimer::~xmTimer()
+    = default;
+
+    float xmTimer::getAbsoluteTime()
 	{
 		updateTimer();
 		return m_fNow;
@@ -61,32 +63,34 @@ namespace XM
 		return m_fDelta;
 	}
 
-	int xmTimer::getNow_Int()
+	int xmTimer::GetNowInt()
 	{
-		return (int)(m_fNow * 1000.0f);
+		return static_cast<int>(m_fNow * 1000.0f);
 	}
-	int xmTimer::getElapsedTime_Int()
+	int xmTimer::GetElapsedTimeInt()
 	{
-		return (int)(m_fDelta * 1000.0f);
+		return static_cast<int>(m_fDelta * 1000.0f);
 	}
 
 	void xmTimer::resetTimer()
 	{
-		m_dwStart   = timeGetTime();
+		m_dwStart = std::chrono::steady_clock::now();
 		m_dwCurrent = m_dwStart;
-		m_dwDelta   = 0;
-		m_fNow      = 0.0f;
-		m_fDelta    = 0.0f;
+		m_dwDelta = std::chrono::steady_clock::duration::zero();
+		m_fNow = 0.0f;
+		m_fDelta = 0.0f;
 	}
 	void xmTimer::updateTimer()
 	{
 		if(m_bPaused == false)
 		{
-			DWORD Current = timeGetTime();
-			m_dwDelta = Current - m_dwCurrent;
-			m_dwCurrent = Current;
-			m_fNow = (float)(m_dwCurrent - m_dwStart) * 0.001f;
-			m_fDelta = (float)(m_dwDelta) * 0.001f;
+			auto current = std::chrono::steady_clock::now();
+			m_dwDelta = current - m_dwCurrent;
+			m_dwCurrent = current;
+			
+			auto totalDuration = m_dwCurrent - m_dwStart;
+			m_fNow = std::chrono::duration<float>(totalDuration).count();
+			m_fDelta = std::chrono::duration<float>(m_dwDelta).count();
 		}
 	}
 

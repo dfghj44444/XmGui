@@ -32,3 +32,7 @@ Debug
 Release
 Rundir
 *.vcproject.*
+/_ReSharper.Caches
+*.db
+/.vs
+/__Debug

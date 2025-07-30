@@ -1,8 +1,16 @@
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "___UILibrary", "_UILibrary\UILibrary.vcproj", "{75753A26-ABE3-4A61-9658-C473F81D417B}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.35706.149
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "___UILibrary", "_UILibrary\UILibrary.vcxproj", "{75753A26-ABE3-4A61-9658-C473F81D417B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_EngineLib", "_EngineLib.vcproj", "{27E9BE8A-E477-49D5-B70F-C8384AA3CFF1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_EngineLib", "_EngineLib.vcxproj", "{27E9BE8A-E477-49D5-B70F-C8384AA3CFF1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XmGuiRenderer", "XmGuiRenderer.vcxproj", "{C3D4E5F6-0000-0000-0000-000000000000}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BasicExample", "examples\BasicExample.vcxproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MultiRendererExample", "examples\MultiRendererExample.vcxproj", "{B2C3D4E5-0000-0000-0000-000000000000}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,9 +26,24 @@ Global
 		{27E9BE8A-E477-49D5-B70F-C8384AA3CFF1}.Debug|Win32.Build.0 = Debug|Win32
 		{27E9BE8A-E477-49D5-B70F-C8384AA3CFF1}.Release|Win32.ActiveCfg = Release|Win32
 		{27E9BE8A-E477-49D5-B70F-C8384AA3CFF1}.Release|Win32.Build.0 = Release|Win32
+		{C3D4E5F6-0000-0000-0000-000000000000}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C3D4E5F6-0000-0000-0000-000000000000}.Debug|Win32.Build.0 = Debug|Win32
+		{C3D4E5F6-0000-0000-0000-000000000000}.Release|Win32.ActiveCfg = Release|Win32
+		{C3D4E5F6-0000-0000-0000-000000000000}.Release|Win32.Build.0 = Release|Win32
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Win32.Build.0 = Debug|Win32
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Win32.ActiveCfg = Release|Win32
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Win32.Build.0 = Release|Win32
+		{B2C3D4E5-0000-0000-0000-000000000000}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B2C3D4E5-0000-0000-0000-000000000000}.Debug|Win32.Build.0 = Debug|Win32
+		{B2C3D4E5-0000-0000-0000-000000000000}.Release|Win32.ActiveCfg = Release|Win32
+		{B2C3D4E5-0000-0000-0000-000000000000}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DEA58891-8E73-40A5-A195-602A8787CAC7}
 	EndGlobalSection
 	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
 		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}

@@ -7,6 +7,8 @@
  */
 
 #include "../include/XmGuiRenderer.h"
+#include <ATLmem.h>
+#include <ATLComMem.h>
 #include <stdexcept>
 #include <algorithm>
 
@@ -51,7 +53,9 @@ class VulkanRenderer;
 // 创建函数声明
 std::unique_ptr<IRenderer> CreateDX9Renderer();
 std::unique_ptr<IRenderer> CreateDX11Renderer();
+#if XMGUI_ENABLE_VULKAN
 std::unique_ptr<IRenderer> CreateVulkanRenderer();
+#endif
 
 //=============================================================================
 // 渲染器工厂实现
@@ -65,7 +69,11 @@ std::unique_ptr<IRenderer> RendererFactory::CreateRenderer(RendererType type) {
         return CreateDX11Renderer();
     
     case RendererType::Vulkan:
+#if XMGUI_ENABLE_VULKAN
         return CreateVulkanRenderer();
+#else
+        throw std::invalid_argument("Vulkan renderer is not enabled in this build");
+#endif
     
     case RendererType::Auto:
         return CreateBestRenderer();
@@ -90,9 +98,11 @@ std::unique_ptr<IRenderer> RendererFactory::CreateBestRenderer() {
     }
     
     // 检查Vulkan支持
+#if XMGUI_ENABLE_VULKAN
     if (std::find(supportedRenderers.begin(), supportedRenderers.end(), RendererType::Vulkan) != supportedRenderers.end()) {
         return CreateVulkanRenderer();
     }
+#endif
     
     throw std::runtime_error("No supported renderer found");
 }
@@ -148,6 +158,7 @@ bool RendererFactory::IsRendererSupported(RendererType type) {
     
     case RendererType::Vulkan:
         {
+#if XMGUI_ENABLE_VULKAN
             // 检查Vulkan支持
             #ifdef _WIN32
             // 检查vulkan-1.dll是否可用
@@ -157,6 +168,7 @@ bool RendererFactory::IsRendererSupported(RendererType type) {
                 return true;
             }
             #endif
+#endif
             return false;
         }
     
@@ -177,9 +189,11 @@ RendererType RendererFactory::GetDefaultRendererType() {
         if (std::find(supportedRenderers.begin(), supportedRenderers.end(), RendererType::DX9) != supportedRenderers.end()) {
             return RendererType::DX9;
         }
+#if XMGUI_ENABLE_VULKAN
         if (std::find(supportedRenderers.begin(), supportedRenderers.end(), RendererType::Vulkan) != supportedRenderers.end()) {
             return RendererType::Vulkan;
         }
+#endif
     }
     
     return RendererType::DX9; // 默认回退到DX9

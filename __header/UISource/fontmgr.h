@@ -35,7 +35,7 @@ namespace XM
         void destroy();
 
     private:
-        typedef stdext::hash_map<std::wstring, CFont*> FontMap;
+        typedef std::unordered_map<std::wstring, CFont*> FontMap;
         FontMap m_FontMap;
 	};
 }

@@ -39,9 +39,6 @@ namespace XM
 		virtual void			onDestroyDevice();
 
 	}; // class resNode
-
-	typedef xmVec<resNode*>	listResNode;
-
 } // namespace XM
 
 #endif // H_XM_RESOURCENODE_H

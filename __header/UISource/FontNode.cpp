@@ -7,6 +7,9 @@ file : XM_FontNode.cpp
 
 namespace XM
 {
+    fontCreateParam::~fontCreateParam()
+    {
+    }
 
 	// ctor/dtor
 	fontNode::fontNode()

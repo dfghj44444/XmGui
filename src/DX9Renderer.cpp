@@ -596,7 +596,7 @@ public:
         DrawVertices(vertices, 6, texture);
     }
 
-    virtual void DrawLine(float x1, float y1, float x2, float y2, const Color& color, float width = 1.0f) override {
+    void DrawLine(float x1, float y1, float x2, float y2, const Color& color, float width = 1.0f) override {
         // 简化的线条绘制（使用矩形模拟）
         float dx = x2 - x1;
         float dy = y2 - y1;
@@ -622,8 +622,7 @@ public:
         }
     }
 
-    virtual void DrawText(const std::wstring& text, float x, float y, const Color& color, 
-                         ITexture* fontTexture = nullptr) override {
+    void DrawTxt(const std::wstring& text, float x, float y, const XM::Color& color, ITexture* fontTexture = nullptr) override {
         // 文本绘制需要字体系统支持，这里只是占位实现
         // 实际实现需要与现有的字体系统集成
     }

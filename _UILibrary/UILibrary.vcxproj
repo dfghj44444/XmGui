@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>___UILibrary</ProjectName>
+    <ProjectGuid>{75753A26-ABE3-4A61-9658-C473F81D417B}</ProjectGuid>
+    <RootNamespace>___UILibrary</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>16.0.35706.149</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)__Lib\</OutDir>
+    <IntDir>$(SolutionDir)__$(Configuration)\$(ProjectName)\</IntDir>
+    <TargetName>UILibD</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)__Lib\</OutDir>
+    <IntDir>$(SolutionDir)__$(Configuration)\$(ProjectName)\</IntDir>
+    <TargetName>UILib</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\src\library\DX9\Include;%DXSDK_DIR%\Include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_CRT_NON_CONFORMING_SWPRINTFS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)__Lib\UILibD.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DisableSpecificWarnings>4819;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(SolutionDir)__Lib\UILibD.lib</OutputFile>
+      <AdditionalLibraryDirectories>D:\CVS_Project\PUI_YB;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\src\library\DX9\Include;%DXSDK_DIR%\Include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_CRT_NON_CONFORMING_SWPRINTFS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)__Lib\UILib.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat />
+      <DisableSpecificWarnings>4819;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(SolutionDir)__Lib\UILib.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\__header\UISource\BaseDef.cpp" />
+    <ClCompile Include="..\__header\UISource\BaseNode.cpp" />
+    <ClCompile Include="..\__header\UISource\Engine.cpp" />
+    <ClCompile Include="..\__header\UISource\font.cpp" />
+    <ClCompile Include="..\__header\UISource\FontMgr.cpp" />
+    <ClCompile Include="..\__header\UISource\FontNode.cpp" />
+    <ClCompile Include="..\__header\UISource\MouseUtil.cpp" />
+    <ClCompile Include="..\__header\UISource\RenderUtil.cpp" />
+    <ClCompile Include="..\__header\UISource\ResMgr.cpp" />
+    <ClCompile Include="..\__header\UISource\ResNode.cpp" />
+    <ClCompile Include="..\__header\UISource\RTTI.cpp" />
+    <ClCompile Include="..\__header\UISource\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\StreamFile.cpp" />
+    <ClCompile Include="..\__header\UISource\StreamUtil.cpp" />
+    <ClCompile Include="..\__header\UISource\TextureMgr.cpp" />
+    <ClCompile Include="..\__header\UISource\TextureNode.cpp" />
+    <ClCompile Include="..\__header\UISource\Timer.cpp" />
+    <ClCompile Include="..\__header\UISource\UIButton.cpp" />
+    <ClCompile Include="..\__header\UISource\UIManager.cpp" />
+    <ClCompile Include="..\__header\UISource\UI_Base.cpp" />
+    <ClCompile Include="..\__header\UISource\UI_Box.cpp" />
+    <ClCompile Include="..\__header\UISource\UI_Object.cpp" />
+    <ClCompile Include="..\__header\UISource\ui_rect.cpp" />
+    <ClCompile Include="..\__header\UISource\UI_RectItem.cpp" />
+    <ClCompile Include="..\__header\UISource\UI_RectItemText.cpp" />
+    <ClCompile Include="..\__header\UISource\UI_Widget.cpp" />
+    <ClCompile Include="..\__header\UISource\_ASSERT.cpp" />
+    <ClCompile Include="EventManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\__header\UISource\BaseDef.h" />
+    <ClInclude Include="..\__header\UISource\stdafx.h" />
+    <ClInclude Include="..\__header\UISource\_Vector.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

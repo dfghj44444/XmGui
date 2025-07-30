@@ -104,10 +104,10 @@ namespace XM
         vp.MinZ = 0.f;
         vp.MaxZ = 1.f;
 
-        vp.X = (DWORD)max(0, getPosX())+4;
-        vp.Y = (DWORD)max(0, getPosY());
-        vp.Width = DWORD(getPosX() + (float)m_Width - (float)vp.X);
-        vp.Height = DWORD(getPosY() + (float)m_Height - (float)vp.Y);
+        vp.X = static_cast<DWORD>(max(0, getPosX()))+4;
+        vp.Y = static_cast<DWORD>(max(0, getPosY()));
+        vp.Width = static_cast<DWORD>(getPosX() + (float)m_Width - (float)vp.X);
+        vp.Height = static_cast<DWORD>(getPosY() + (float)m_Height - (float)vp.Y);
         pd3dDevice->SetViewport(&vp);
 
         for (int i = 0; i < m_listControls.size(); ++i)
@@ -151,7 +151,7 @@ namespace XM
 
 			if (m_listControls[i]->getRTTI()->isAKindOf(&UI_Box::RTTI))
             {
-                UI_Object* pControl = ((UI_Box*)m_listControls[i])->findControl(nControlID);
+                UI_Object* pControl = static_cast<UI_Box*>(m_listControls[i])->findControl(nControlID);
                 if (pControl)
                     return pControl;
             }
@@ -202,7 +202,7 @@ namespace XM
             }
 
 			if (m_listControls[i]->getRTTI()->isAKindOf(&UI_Box::RTTI) )
-                ((UI_Box*)m_listControls[i])->setControlEnabled(nID, bFlag);
+                static_cast<UI_Box*>(m_listControls[i])->setControlEnabled(nID, bFlag);
         }
     }
 

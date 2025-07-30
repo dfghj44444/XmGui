@@ -18,8 +18,7 @@ namespace XM
 		UI_Base();
 
 	public:
-
-		virtual ~UI_Base();
+        ~UI_Base() override;
 
 		// serialize
 		virtual bool			saveFile(IStream& rStream) = 0;

@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Font">
+      <UniqueIdentifier>{715949a0-eb1e-4b87-a78d-ee42307741fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Timer">
+      <UniqueIdentifier>{9b0d6c4b-8cd5-4a81-b25b-dd13075681cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IO">
+      <UniqueIdentifier>{f550fede-e238-49a6-8314-b625aeb83228}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{5ccb5969-edc4-42e9-84c9-f52154f472ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XMTL">
+      <UniqueIdentifier>{e584784a-8701-440f-8f45-75a6c6b91860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{a0d6ee05-dbc9-470b-a972-c130891af544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ctrl">
+      <UniqueIdentifier>{00d755e5-3faa-4cb4-a819-484ca6b0b7b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{8378f38a-6585-4a9f-acff-ef1d56bcb9e1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\__header\UISource\_ASSERT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\BaseNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\MouseUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\RTTI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\font.cpp">
+      <Filter>Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\FontMgr.cpp">
+      <Filter>Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\FontNode.cpp">
+      <Filter>Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\Timer.cpp">
+      <Filter>Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\StreamFile.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\StreamUtil.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\ResMgr.cpp">
+      <Filter>resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\ResNode.cpp">
+      <Filter>resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\TextureMgr.cpp">
+      <Filter>resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\TextureNode.cpp">
+      <Filter>resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\RenderUtil.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\UI_Base.cpp">
+      <Filter>Ctrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\UI_Box.cpp">
+      <Filter>Ctrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\UI_Object.cpp">
+      <Filter>Ctrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\ui_rect.cpp">
+      <Filter>Ctrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\UI_RectItem.cpp">
+      <Filter>Ctrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\UI_RectItemText.cpp">
+      <Filter>Ctrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\UI_Widget.cpp">
+      <Filter>Ctrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\UIManager.cpp">
+      <Filter>Ctrl</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\UIButton.cpp">
+      <Filter>Ctrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\__header\UISource\BaseDef.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\__header\UISource\BaseDef.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\__header\UISource\stdafx.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\__header\UISource\_Vector.h">
+      <Filter>XMTL</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

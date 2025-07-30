@@ -27,6 +27,7 @@ XmGui是一个专为游戏开发设计的轻量级UI库，基于DirectX 9技术�
 - **基础控件**: 按钮(Button)、文本框(TextBox)、标签(Label)
 - **容器控件**: 面板(Panel)、对话框(Dialog)、窗口(Window)
 - **高级控件**: 列表框(ListBox)、下拉框(ComboBox)、进度条(ProgressBar)
+- **新体系控件**: 基于渲染器抽象层的现代化UI控件
 
 ### 🛠️ 完善的系统架构
 - **RTTI系统**: 运行时类型信息支持
@@ -230,6 +231,46 @@ pManager->addChild(pControl);
 pControl->setPosition(x, y, z);
 pControl->setVisible(true);
 pControl->setEnabled(true);
+```
+
+### 新体系UI控件
+
+#### UIButton (新)
+基于渲染器抽象层的现代化按钮控件，支持多种渲染后端。
+
+```cpp
+#include "include/XmGuiRenderer.h"
+#include "include/UIButton.h"
+
+// 创建渲染器
+auto renderer = XM::CreateRenderer(XM::RendererType::DX11, hWnd, 800, 600);
+renderer->Initialize(hWnd, 800, 600);
+
+// 创建按钮
+auto button = XM::CreateUIButton(renderer.get());
+button->SetPosition(100, 100);
+button->SetSize(200, 50);
+button->SetText(L"点击我");
+button->SetTextColor(XM::Color::White);
+button->SetNormalColor(XM::Color(0.2f, 0.2f, 0.8f, 1.0f));
+button->SetHoverColor(XM::Color(0.3f, 0.3f, 0.9f, 1.0f));
+button->SetPressedColor(XM::Color(0.1f, 0.1f, 0.7f, 1.0f));
+
+// 设置事件回调
+button->SetOnClick([]() {
+    std::cout << "按钮被点击了！" << std::endl;
+});
+
+// 渲染循环
+renderer->BeginFrame();
+renderer->Clear(XM::Color::DarkBlue);
+button->Render();
+renderer->EndFrame();
+renderer->Present();
+
+// 处理输入
+button->HandleMouseMove(mouseX, mouseY);
+button->HandleMouse(mouseX, mouseY, mouseButton, mouseDown);
 ```
 
 ## 开发计划

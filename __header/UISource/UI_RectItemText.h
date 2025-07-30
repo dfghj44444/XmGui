@@ -9,7 +9,7 @@ file : XM_UI_RectItemText.h
 
 namespace XM
 {
-	class UI_RectItemText : public UI_RectItem
+	class UI_RectItemText final : public UI_RectItem
 	{
 		XM_RTTI_DECLARE_STATIC
 
@@ -45,17 +45,17 @@ namespace XM
 
 		// ctor/dtor
 		UI_RectItemText();
-		virtual ~UI_RectItemText();
+        ~UI_RectItemText() override;
 
 		// serialize
-		virtual bool			saveFile(IStream& rStream);
-		virtual bool			loadFile(IStream& rStream);
+        bool			saveFile(IStream& rStream) override;
+        bool			loadFile(IStream& rStream) override;
 
 		void					setTextData(const CStringW strTextData);
 		void					setTextData(const WCHAR* strTextData);
 		void					setTextData(const char* strTextData);
 
-		bool					setFont(const WCHAR* strFontname, int nFontHeight, int nFontWeight, BOOL bItalic);
+		bool					setFont(const WCHAR* strFontName, int nFontHeight, int nFontWeight, BOOL bItalic);
 		void					setFont(fontNode* pFontNode);
 		fontNode*				getFont();
 		void					setDrawFormat(const DWORD dwFormat);

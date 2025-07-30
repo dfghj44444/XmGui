@@ -303,7 +303,7 @@ namespace XM
 
 		int nSize = m_listControls.size();
 				
-		m_fAlpha += ( (float)dwElapsedTime / 3000.0f ) * 1500.0f;
+		m_fAlpha += ( static_cast<float>(dwElapsedTime) / 3000.0f ) * 1500.0f;
 
 		for( int i = 0; i < nSize; ++i )
 		{

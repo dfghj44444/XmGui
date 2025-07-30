@@ -11,9 +11,9 @@ namespace XM
 	// fontMgr
 	// ctor/dtor
 	fontMgr::fontMgr()
-	{
-	}
-	fontMgr::~fontMgr()
+    = default;
+
+    fontMgr::~fontMgr()
 	{
 		clear();
 	}

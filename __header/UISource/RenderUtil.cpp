@@ -19,20 +19,20 @@ namespace XM
 		}
 
 		VTXTYPE_2D_COLOR colorRect[4];
-		colorRect[0].x = (float)rRC.left;
-		colorRect[0].y = (float)rRC.top;
+		colorRect[0].x = static_cast<float>(rRC.left);
+		colorRect[0].y = static_cast<float>(rRC.top);
 		colorRect[0].z = z;
 		colorRect[0].h = 1;
-		colorRect[1].x = (float)rRC.right;
-		colorRect[1].y = (float)rRC.top;
+		colorRect[1].x = static_cast<float>(rRC.right);
+		colorRect[1].y = static_cast<float>(rRC.top);
 		colorRect[1].z = z;
 		colorRect[1].h = 1;
-		colorRect[2].x = (float)rRC.right;
-		colorRect[2].y = (float)rRC.bottom;
+		colorRect[2].x = static_cast<float>(rRC.right);
+		colorRect[2].y = static_cast<float>(rRC.bottom);
 		colorRect[2].z = z;
 		colorRect[2].h = 1;
-		colorRect[3].x = (float)rRC.left;
-		colorRect[3].y = (float)rRC.bottom;
+		colorRect[3].x = static_cast<float>(rRC.left);
+		colorRect[3].y = static_cast<float>(rRC.bottom);
 		colorRect[3].z = z;
 		colorRect[3].h = 1;
 		colorRect[0].color = cColor;
@@ -51,20 +51,20 @@ namespace XM
 		}
 
 		VTXTYPE_2D_COLOR colorRect[4];
-		colorRect[0].x = (float)rRC.left;
-		colorRect[0].y = (float)rRC.top+5;
+		colorRect[0].x = static_cast<float>(rRC.left);
+		colorRect[0].y = static_cast<float>(rRC.top)+5;
 		colorRect[0].z = z;
 		colorRect[0].h = 1;
-		colorRect[1].x = (float)rRC.right-17;
-		colorRect[1].y = (float)rRC.top+5;
+		colorRect[1].x = static_cast<float>(rRC.right)-17;
+		colorRect[1].y = static_cast<float>(rRC.top)+5;
 		colorRect[1].z = z;
 		colorRect[1].h = 1;
-		colorRect[2].x = (float)rRC.right-17;
-		colorRect[2].y = (float)rRC.bottom;
+		colorRect[2].x = static_cast<float>(rRC.right)-17;
+		colorRect[2].y = static_cast<float>(rRC.bottom);
 		colorRect[2].z = z;
 		colorRect[2].h = 1;
-		colorRect[3].x = (float)rRC.left;
-		colorRect[3].y = (float)rRC.bottom;
+		colorRect[3].x = static_cast<float>(rRC.left);
+		colorRect[3].y = static_cast<float>(rRC.bottom);
 		colorRect[3].z = z;
 		colorRect[3].h = 1;
 		colorRect[0].color = cColor;

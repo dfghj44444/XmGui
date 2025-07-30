@@ -9,13 +9,13 @@ file : XM_Base.h
 
 // 包含配置文件
 #include "../../include/XmGuiConfig.h"
-
+namespace XM{
 // 使用配置文件中的值替代硬编码常量
 #define H_DEF_VECTORT_BASESIZE_H			XMGUI_VECTOR_BASE_SIZE
 #define H_DEF_LEAKCHECKNAME_LENGTH			XMGUI_LEAK_CHECK_NAME_LENGTH
 #define	H_DEF_UNDO_LEVEL_DEFAULT			XMGUI_UNDO_LEVEL_DEFAULT
 
-typedef enum UI_CONTROL_STATE
+enum UI_CONTROL_STATE
 {
 	UIDS_INVISIBLE = 0,
 	UIDS_DISABLE ,
@@ -84,13 +84,6 @@ inline char* WcharToChar(const wchar_t* pwstrSrc)
 	return pstr;
 }
 
-void makeStandard(wchar_t* name)
-{
-	_wcsupr(name);
-	for(int i = 0; name[i]; ++i)
-	{
-		if(name[i] == L'/')
-			name[i] = L'\\';
-	}
+void makeStandard(wchar_t* name);
 }
 #endif // H_XM_BASEFILES_H

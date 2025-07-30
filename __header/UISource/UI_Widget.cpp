@@ -178,7 +178,37 @@ namespace XM
 	{
 		return m_ControlState;
 	}
-	// control state
+
+    bool UI_Widget::setFont(const WCHAR* strFontName, int nFontHeight, int nFontWeight, BOOL bItalic)
+    {
+      if (m_pFontNode)
+      {
+        m_pFontNode->DelRef();
+        m_pFontNode = nullptr;
+      }
+      m_pFontNode = g_pStaticFontMgr->getFontNode(strFontName,{});//todo:: nFontHeight, nFontWeight, 0,0, bItalic});
+      if (m_pFontNode)
+      {
+        m_pFontNode->AddRef();
+        return true;
+      }
+      return false;
+    }
+
+    void UI_Widget::setFont(fontNode* pFontNode)
+    {
+      if (m_pFontNode)
+      {
+        m_pFontNode->DelRef();
+      }
+      m_pFontNode = pFontNode;
+      if (m_pFontNode)
+      {
+        m_pFontNode->AddRef();
+      }
+    }
+
+    // control state
 	///////////////////////////////////////////////////////////////////////////
 
 	///////////////////////////////////////////////////////////////////////////
@@ -262,7 +292,7 @@ namespace XM
 		{
 			for(int i = 0; i<SCT_STATUS_COUNT; ++i)
 			{
-				pRect->setItem((STATUSUI_CONTROL_STATE)i, pRectItem);
+				pRect->setItem(static_cast<STATUSUI_CONTROL_STATE>(i), pRectItem);
 			}
 		}
 	}
@@ -384,7 +414,7 @@ namespace XM
 
 	void UI_Widget::render( IDirect3DDevice9* pd3dDevice)
 	{
-		for (int i =0;i < SCT_STATUS_COUNT;i++)
+		for (int i =0;i < m_listRect.size();i++)
 		{
 			m_listRect[i]->render(pd3dDevice);
 		}

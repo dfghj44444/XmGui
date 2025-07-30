@@ -1,7 +1,6 @@
 #ifndef _DXENGINE_H_
 #define _DXENGINE_H_
 
-#include <d3dx9core.h>
 #include <d3d9.h>
 #include "D3DEnumer.h"
 

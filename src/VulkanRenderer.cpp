@@ -8,6 +8,9 @@
 
 #include "../include/XmGuiRenderer.h"
 
+// 只有在启用Vulkan支持时才编译此文件
+#if XMGUI_ENABLE_VULKAN
+
 #ifdef _WIN32
     #define VK_USE_PLATFORM_WIN32_KHR
     #include <windows.h>
@@ -745,4 +748,6 @@ std::unique_ptr<IRenderer> CreateVulkanRenderer() {
     return std::move(renderer);
 }
 
-} // namespace XM 
+} // namespace XM
+
+#endif // XMGUI_ENABLE_VULKAN 

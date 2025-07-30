@@ -143,9 +143,9 @@ namespace XM
 				}
 				else if( SCT_NORMAL == m_controlState )
 				{
-					if( m_Items[SCT_TIP_NORMAL] )
+					if( m_Items[SCT_NORMAL])
 					{
-						m_Items[SCT_TIP_NORMAL]->render( pDevice );
+						m_Items[SCT_NORMAL]->render( pDevice );
 					}
 				}
 				else if( SCT_PUSH == m_controlState )
@@ -162,7 +162,20 @@ namespace XM
 			}
 		}
 	}
-	// render
+
+    void UI_Rect::frameMove(DWORD dwElapsedTime)
+    {
+      for (const auto& item : m_Items)
+      {
+        if (item)
+        {
+            item->frameMove(dwElapsedTime);
+        }
+      }
+     // updateControlState();
+    }
+
+    // render
 	///////////////////////////////////////////////////////////////////////////
 
 	///////////////////////////////////////////////////////////////////////////
@@ -174,7 +187,25 @@ namespace XM
 
 		return false;
 	}
-	// hit test
+
+    void UI_Rect::setState(STATUSUI_CONTROL_STATE cControlState)
+    {
+      if (cControlState >= SCT_INVISIBLE && cControlState < SCT_STATUS_COUNT)
+      {
+        m_controlState = cControlState;
+      }
+      else
+      {
+        m_controlState = SCT_NORMAL; // default state
+      }
+      // update the current item based on the control state
+      if (m_Items[m_controlState])
+      {
+        //todo: m_Items[m_controlState]->setState(m_controlState);
+      }
+    }
+
+    // hit test
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	// set control rect

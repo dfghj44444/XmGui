@@ -13,12 +13,15 @@
  */
 
 #include "../include/XmGui.h"
+#include "../__header/UISource/uibutton.h"
+#include "../__header/UISource/UI_RectItemText.h"
 #include <iostream>
 
 // 全局变量
 HWND                g_hWnd = nullptr;
 IDirect3D9*         g_pD3D = nullptr;
 IDirect3DDevice9*   g_pD3DDevice = nullptr;
+D3DPRESENT_PARAMETERS g_d3dpp = {};  // DirectX设备参数
 XM::UI_Manager*     g_pUIManager = nullptr;
 XM::xmEngine*       g_pEngine = nullptr;
 
@@ -215,13 +218,14 @@ bool InitializeDirectX(HWND hWnd)
     g_pD3D->GetAdapterIdentifier(D3DADAPTER_DEFAULT, 0, &adapterID);
 
     // 设置D3D设备参数
-    D3DPRESENT_PARAMETERS d3dpp = {};
-    d3dpp.Windowed = TRUE;
-    d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-    d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
-    d3dpp.EnableAutoDepthStencil = TRUE;
-    d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
-    d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+    ZeroMemory(&g_d3dpp, sizeof(g_d3dpp));
+    g_d3dpp.Windowed = TRUE;
+    g_d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
+    g_d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
+    g_d3dpp.EnableAutoDepthStencil = TRUE;
+    g_d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
+    g_d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+    g_d3dpp.hDeviceWindow = hWnd;
 
     // 创建D3D设备
     HRESULT hr = g_pD3D->CreateDevice(
@@ -229,7 +233,7 @@ bool InitializeDirectX(HWND hWnd)
         D3DDEVTYPE_HAL,
         hWnd,
         D3DCREATE_SOFTWARE_VERTEXPROCESSING,
-        &d3dpp,
+        &g_d3dpp,
         &g_pD3DDevice
     );
 
@@ -241,7 +245,7 @@ bool InitializeDirectX(HWND hWnd)
             D3DDEVTYPE_REF,
             hWnd,
             D3DCREATE_SOFTWARE_VERTEXPROCESSING,
-            &d3dpp,
+            &g_d3dpp,
             &g_pD3DDevice
         );
     }
@@ -311,18 +315,39 @@ bool CreateUI()
     // 添加UI管理器到引擎
     g_pEngine->addStatusUIManager(g_pUIManager);
 
-    // 创建标题标签
-    // 注意：这里需要根据实际的UI库API来调整
-    
     // 创建按钮
     XM::UI_Button* pOkButton = new XM::UI_Button();
     if (pOkButton)
     {
         pOkButton->setID(100);
         pOkButton->setPosition(100, 100, 0);
-        // 设置按钮文本（需要根据实际API调整）
-        // pOkButton->setText(L"确定");
-        g_pUIManager->addChild(pOkButton);
+        
+        // 获取按钮的矩形区域并设置文本
+        XM::UI_Rect* pRect = pOkButton->getRectByOrdinal(0);
+        if (pRect)
+        {
+            // 创建文本项
+            XM::UI_RectItemText* pTextItem = new XM::UI_RectItemText();
+            if (pTextItem)
+            {
+                pTextItem->setTextData(L"确定");
+                pTextItem->setFontColor(XM::MakeColor(255, 255, 255)); // 白色文字
+                pTextItem->setBackgroundColor(XM::MakeColor(0, 120, 215)); // 蓝色背景
+                pTextItem->setUseBackgroundColor(true);
+                pTextItem->setDrawFormat(DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+                
+                // 设置字体
+                pTextItem->setFont(L"Arial", 16, FW_NORMAL, false);
+                
+                // 设置按钮尺寸
+               // pTextItem->setSize(D3DXVECTOR3(100, 30, 0)); // 宽度100，高度30
+                
+                // 将文本项添加到矩形区域
+                pRect->setItem(XM::SCT_NORMAL, pTextItem);
+            }
+        }
+        
+        g_pUIManager->addControl(pOkButton);
     }
 
     XM::UI_Button* pCancelButton = new XM::UI_Button();
@@ -330,8 +355,33 @@ bool CreateUI()
     {
         pCancelButton->setID(101);
         pCancelButton->setPosition(220, 100, 0);
-        // pCancelButton->setText(L"取消");
-        g_pUIManager->addChild(pCancelButton);
+        
+        // 获取按钮的矩形区域并设置文本
+        XM::UI_Rect* pRect = pCancelButton->getRectByOrdinal(0);
+        if (pRect)
+        {
+            // 创建文本项
+            XM::UI_RectItemText* pTextItem = new XM::UI_RectItemText();
+            if (pTextItem)
+            {
+                pTextItem->setTextData(L"取消");
+                pTextItem->setFontColor(XM::MakeColor(255, 255, 255)); // 白色文字
+                pTextItem->setBackgroundColor(XM::MakeColor(128, 128, 128)); // 灰色背景
+                pTextItem->setUseBackgroundColor(true);
+                pTextItem->setDrawFormat(DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+                
+                // 设置字体
+                pTextItem->setFont(L"Arial", 16, FW_NORMAL, false);
+                
+                // 设置按钮尺寸
+             //   pTextItem->setSize(D3DXVECTOR3(100, 30, 0)); // 宽度100，高度30
+                
+                // 将文本项添加到矩形区域
+                pRect->setItem(XM::SCT_NORMAL, pTextItem);
+            }
+        }
+        
+        g_pUIManager->addControl(pCancelButton);
     }
 
     XM::UI_Button* pExitButton = new XM::UI_Button();
@@ -339,8 +389,33 @@ bool CreateUI()
     {
         pExitButton->setID(102);
         pExitButton->setPosition(340, 100, 0);
-        // pExitButton->setText(L"退出");
-        g_pUIManager->addChild(pExitButton);
+        
+        // 获取按钮的矩形区域并设置文本
+        XM::UI_Rect* pRect = pExitButton->getRectByOrdinal(0);
+        if (pRect)
+        {
+            // 创建文本项
+            XM::UI_RectItemText* pTextItem = new XM::UI_RectItemText();
+            if (pTextItem)
+            {
+                pTextItem->setTextData(L"退出");
+                pTextItem->setFontColor(XM::MakeColor(255, 255, 255)); // 白色文字
+                pTextItem->setBackgroundColor(XM::MakeColor(215, 0, 0)); // 红色背景
+                pTextItem->setUseBackgroundColor(true);
+                pTextItem->setDrawFormat(DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+                
+                // 设置字体
+                pTextItem->setFont(L"Arial", 16, FW_NORMAL, false);
+                
+                // 设置按钮尺寸
+             //   pTextItem->setSize(D3DXVECTOR3(100, 30, 0)); // 宽度100，高度30
+                
+                // 将文本项添加到矩形区域
+                pRect->setItem(XM::SCT_NORMAL, pTextItem);
+            }
+        }
+        
+        g_pUIManager->addControl(pExitButton);
     }
 
     return true;

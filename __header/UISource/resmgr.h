@@ -11,7 +11,7 @@ namespace XM
 	{
 	protected:
 
-		listResNode				m_listResources;
+		 xmVec<resNode*>		m_listResources;
 
 	public:
 

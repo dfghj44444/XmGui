@@ -1,37 +1,29 @@
-/*
-
-file : ANW_StatusUI_Button.cpp
-
-*/
-
-
 #include "stdafx.h"
+#include "uibutton.h"
 
-namespace ANW
+namespace XM
 {
-	// RTTI 상속
-	ANW_RTTI_CREATE_STATIC(StatusUI_Button, L"StatusUI_Button", StatusUI_Control);
+	// RTTI 若싦퉱
+	XM_RTTI_CREATE_STATIC(UI_Button, L"UI_Button", UI_Widget);
 
 	///////////////////////////////////////////////////////////////////////////
 	// ctor/dtor
-	StatusUI_Button::StatusUI_Button()
+	UI_Button::UI_Button()
 	{
-		// RTTI 클래스포인터 저장
-		ANW_RTTI_INIT_POINTER;
+		XM_RTTI_INIT_POINTER;
 
 		// control type
-		m_ControlType	= SCT_BUTTON;
+		//m_ControlType	= SCT_BUTTON;
 
-		// 버튼 생성
-		StatusUI_Rect* pRect;
-		ANW_NEW(pRect, StatusUI_Rect);
+		UI_Rect* pRect;
+		_NEW(pRect, UI_Rect);
 		if(addRect(pRect) == false)
 		{
-			ANW_ASSERT(0);
+			XM_ASSERT(0);
 		}
 	}
 
-	StatusUI_Button::~StatusUI_Button()
+	UI_Button::~UI_Button()
 	{
 		clear();
 	}
@@ -40,15 +32,15 @@ namespace ANW
 
 	///////////////////////////////////////////////////////////////////////////
 	// serialize
-	bool StatusUI_Button::saveFile(IStream& rStream)
+	bool UI_Button::saveFile(IStream& rStream)
 	{
-		if( false == StatusUI_Control::saveFile(rStream) )	return false;
+		if( false == UI_Widget::saveFile(rStream) )	return false;
 
 		return true;
 	}
-	bool StatusUI_Button::loadFile(IStream& rStream)
+	bool UI_Button::loadFile(IStream& rStream)
 	{
-		if( false == StatusUI_Control::loadFile(rStream) )	return false;
+		if( false == UI_Widget::loadFile(rStream) )	return false;
 		
 		return true;
 	}
@@ -57,11 +49,11 @@ namespace ANW
 
 	///////////////////////////////////////////////////////////////////////////
 	// init/refresh
-	HRESULT StatusUI_Button::onInit()
+	HRESULT UI_Button::onInit()
 	{
 		return S_OK;
 	}
-	void StatusUI_Button::refresh()
+	void UI_Button::refresh()
 	{
 		m_bMouseOver = false;
 		m_bHasFocus = false;
@@ -71,7 +63,7 @@ namespace ANW
 
 	///////////////////////////////////////////////////////////////////////////
 	// render
-	void StatusUI_Button::render(StatusUI_Manager* pDialog, IDirect3DDevice9* pd3dDevice)
+	void UI_Button::render(UI_Manager* pDialog, IDirect3DDevice9* pd3dDevice)
 	{
 		if(m_bVisible == false)
 		{
@@ -90,31 +82,31 @@ namespace ANW
 
 	///////////////////////////////////////////////////////////////////////////
 	// message handler
-	void StatusUI_Button::onFocusIn(StatusUI_Manager* pDialog)
+	void UI_Button::onFocusIn(UI_Manager* pDialog)
 	{
 		m_bHasFocus = true;
 		updateControlState();
 	}
-	void StatusUI_Button::onFocusOut(StatusUI_Manager* pDialog)
+	void UI_Button::onFocusOut(UI_Manager* pDialog)
 	{
 		m_bHasFocus = false;
 		updateControlState();
 	}
-	void StatusUI_Button::onMouseEnter(StatusUI_Manager* pDialog)
+	void UI_Button::onMouseEnter(UI_Manager* pDialog)
 	{
 		m_bMouseOver = true;
 		updateControlState();
 	}
-	void StatusUI_Button::onMouseLeave(StatusUI_Manager* pDialog)
+	void UI_Button::onMouseLeave(UI_Manager* pDialog)
 	{
 		m_bMouseOver = false;
-		//  [8/7/2007 조을형]
+		//  [8/7/2007 ]
 		m_bPressed = false;
 		updateControlState();		
 
 		//pDialog->sendEvent(SET_CHAT_BG_HIDE,true,this);
 	}
-	void StatusUI_Button::onHotkey(StatusUI_Manager* pDialog)
+	void UI_Button::onHotkey(UI_Manager* pDialog)
 	{
 		if(pDialog)
 		{
@@ -122,7 +114,7 @@ namespace ANW
 			pDialog->sendEvent(SET_BUTTON_CLICKED, true, this );			
 		}		
 	}
-	bool StatusUI_Button::handleMouse(StatusUI_Manager* pDialog, UINT uMsg, WPARAM wParam, LPARAM lParam)
+	bool UI_Button::handleMouse(UI_Manager* pDialog, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		if((m_bVisible == false)||(m_bEnabled == false)||(pDialog == 0))
 		{
@@ -155,7 +147,7 @@ namespace ANW
 				SetCapture(hWnd);
 				pDialog->setFocus(this);
 				
-				//  [8/7/2007 조을형]
+				//  [8/7/2007 ]
 				updateControlState();
 
 				return true;
@@ -200,7 +192,7 @@ namespace ANW
 					if(hitTest(mouseX, mouseY, fDist))
 					{
 						updateControlState();
-						pDialog->sendEvent(SET_BUTTON_R_CLECK, true, this);					
+						pDialog->sendEvent(SET_BUTTON_R_CLICKED, true, this);					
 					}
 					else
 					{
@@ -214,10 +206,10 @@ namespace ANW
 
 		return false;
 	}
-	bool StatusUI_Button::msgProc(StatusUI_Manager* pDialog, UINT uMsg, WPARAM wParam, LPARAM lParam)
+	bool UI_Button::msgProc(UI_Manager* pDialog, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		return false;
 	}
 	///////////////////////////////////////////////////////////////////////////
 
-} // namespace ANW
+} // namespace XM

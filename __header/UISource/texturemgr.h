@@ -9,7 +9,9 @@ file : XM_TextureMgr.h
 
 namespace XM
 {
-	class texMgr : public resMgr
+    class texCreateParam;
+
+    class texMgr : public resMgr
 	{
 
 	protected:
@@ -17,7 +19,7 @@ namespace XM
 	public:
 
 		texMgr();
-		virtual ~texMgr();
+        ~texMgr() override;
 
 		texNode*				getTextureNode(CStringW filename);
 		texNode*				getTextureNode(CStringW filename, texCreateParam* pParam);

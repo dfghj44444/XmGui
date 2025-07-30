@@ -1,38 +1,38 @@
 @echo off
 echo ======================================
-echo       XmGui 示例编译脚本
+echo       XmGui Example Build Script
 echo ======================================
 echo.
 
-REM 设置编译环境
+REM Set compilation environment2
 set INCLUDE_PATH=../include;../__header;../__header/UISource;../__header/Engine
 set LIB_PATH=../lib;../__lib
 set LIBS=UILib.lib Engine.lib d3d9.lib d3dx9.lib kernel32.lib user32.lib gdi32.lib
 
-REM 检查编译器
+REM Check compiler
 where cl >nul 2>nul
 if %errorlevel% neq 0 (
-    echo 错误：找不到Visual Studio编译器！
-    echo 请确保已安装Visual Studio并运行了vcvars32.bat
+    echo ERROR: Visual Studio compiler not found!
+    echo Please make sure Visual Studio is installed and vcvars32.bat is executed
     pause
     exit /b 1
 )
 
-REM 检查DirectX库
+REM Check DirectX libraries
 if not exist "%DXSDK_DIR%\Lib\x86\d3d9.lib" (
-    echo 警告：未找到DirectX SDK，可能会导致链接错误
-    echo 请确保已安装DirectX SDK并设置了DXSDK_DIR环境变量
+    echo WARNING: DirectX SDK not found, may cause linking errors
+    echo Please make sure DirectX SDK is installed and DXSDK_DIR environment variable is set
     echo.
 )
 
-REM 创建输出目录
+REM Create output directory
 if not exist "bin" mkdir bin
 
-echo 开始编译示例...
+echo Starting compilation...
 echo.
 
-REM 编译BasicExample
-echo 正在编译 BasicExample.cpp...
+REM Compile BasicExample
+echo Compiling BasicExample.cpp...
 cl /nologo /EHsc /W3 /MD ^
    /I"%INCLUDE_PATH%" ^
    /I"%DXSDK_DIR%\Include" ^
@@ -45,21 +45,21 @@ cl /nologo /EHsc /W3 /MD ^
    /SUBSYSTEM:WINDOWS
 
 if %errorlevel% equ 0 (
-    echo ✓ BasicExample.exe 编译成功
+    echo SUCCESS: BasicExample.exe compiled successfully
 ) else (
-    echo ✗ BasicExample.exe 编译失败
+    echo FAILED: BasicExample.exe compilation failed
     goto :error
 )
 
 echo.
 echo ======================================
-echo       编译完成！
+echo       Compilation Complete!
 echo ======================================
 echo.
-echo 生成的文件：
+echo Generated files:
 dir /b bin\*.exe
 echo.
-echo 使用方法：
+echo Usage:
 echo   cd bin
 echo   BasicExample.exe
 echo.
@@ -69,20 +69,20 @@ exit /b 0
 :error
 echo.
 echo ======================================
-echo       编译失败！
+echo       Compilation Failed!
 echo ======================================
 echo.
-echo 可能的原因：
-echo 1. 未安装Visual Studio或未设置环境变量
-echo 2. 未安装DirectX SDK
-echo 3. 库文件路径不正确
-echo 4. 头文件路径不正确
+echo Possible causes:
+echo 1. Visual Studio not installed or environment variables not set
+echo 2. DirectX SDK not installed
+echo 3. Library file paths are incorrect
+echo 4. Header file paths are incorrect
 echo.
-echo 解决方法：
-echo 1. 运行Visual Studio命令提示符
-echo 2. 确保DirectX SDK已安装并设置DXSDK_DIR
-echo 3. 检查库文件是否存在于 %LIB_PATH%
-echo 4. 检查头文件是否存在于 %INCLUDE_PATH%
+echo Solutions:
+echo 1. Run Visual Studio Command Prompt
+echo 2. Make sure DirectX SDK is installed and DXSDK_DIR is set
+echo 3. Check if library files exist in %LIB_PATH%
+echo 4. Check if header files exist in %INCLUDE_PATH%
 echo.
 pause
 exit /b 1 

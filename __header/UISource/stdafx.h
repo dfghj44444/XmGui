@@ -53,7 +53,7 @@ MA 02110-1301, USA., or go to http://www.gnu.org/copyleft/lesser.txt
 #include <strsafe.h>
 #include <atlstr.h>
 #include <map>
-#include <hash_map>
+#include <unordered_map>
 #include <vector>
 #include <usp10.h>
 #include <dimm.h>

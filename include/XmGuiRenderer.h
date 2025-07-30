@@ -282,9 +282,8 @@ public:
     virtual void DrawRectangle(const Rectangle& rect, const Color& color) = 0;
     virtual void DrawRectangle(const Rectangle& rect, ITexture* texture, 
                              const Rectangle* sourceRect = nullptr) = 0;
-    virtual void DrawLine(float x1, float y1, float x2, float y2, const Color& color, float width = 1.0f) = 0;
-    virtual void DrawText(const std::wstring& text, float x, float y, const Color& color, 
-                         ITexture* fontTexture = nullptr) = 0;
+    virtual void DrawLine(float x1, float y1, float x2, float y2, const XM::Color& color, float width = 1.0f) = 0;
+    virtual void DrawTxt(const std::wstring& text, float x, float y, const XM::Color& color, ITexture* fontTexture = nullptr) = 0;
     
     //=========================================================================
     // 资源管理

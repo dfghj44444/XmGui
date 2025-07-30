@@ -292,7 +292,7 @@ HRESULT CD3DEnumeration::Enumerate()
         return hr;
     if( FAILED( hr = m_pAllowedAdapterFormatList->Add( &( fmt = D3DFMT_X1R5G5B5 ) ) ) )
         return hr;
-	if( FAILED( hr = m_pAllowedAdapterFormatList->Add( &( fmt = D3DFMT_A1R5G5B5 ) ) ) )
+    if( FAILED( hr = m_pAllowedAdapterFormatList->Add( &( fmt = D3DFMT_A1R5G5B5 ) ) ) )
         return hr;
     if( FAILED( hr = m_pAllowedAdapterFormatList->Add( &( fmt = D3DFMT_R5G6B5 ) ) ) )
         return hr;

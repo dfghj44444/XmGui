@@ -39,12 +39,22 @@
 
 #ifndef XMGUI_H
 #define XMGUI_H
+// Unicode和字符集支持
+#ifndef UNICODE
+#define UNICODE
+#endif
+
+#ifndef _UNICODE
+#define _UNICODE
+#endif
+
+#include <d3d9.h>
 
 // 版本信息
 #define XMGUI_VERSION_MAJOR 1
 #define XMGUI_VERSION_MINOR 0
 #define XMGUI_VERSION_PATCH 0
-#define XMGUI_VERSION_STRING "1.0.0"
+#define XMGUI_VERSION_STRING L"1.0.0"
 
 // 平台检测
 #if !defined(_WIN32) && !defined(_WIN64)
@@ -87,7 +97,7 @@
 
 #include <windows.h>
 #include <tchar.h>
-#include <d3d9.h>
+#include <wchar.h>
 #include <d3dx9.h>
 
 // 标准C++头文件
@@ -97,7 +107,7 @@
 #include <memory>
 #include <algorithm>
 #include <functional>
-
+#include <iostream>
 // 兼容性定义
 #if XMGUI_CONFIG_UNICODE
     typedef std::wstring XmString;
@@ -122,24 +132,34 @@ namespace XM {
     class RTTIClass;
     class fontNode;
     class texNode;
+    class UI_RectItem;
 }
+
 
 // 包含核心头文件（保持向后兼容）
 #include "../__header/UISource/BaseDef.h"
 #include "../__header/UISource/EnumTypes.h"
 #include "../__header/UISource/RTTI.h"
+#include "../__header/UISource/_Vector.h"
 #include "../__header/UISource/BaseNode.h"
+#include "../__header/UISource/ResNode.h"
+#include "../__header/UISource/ResMgr.h"
 #include "../__header/UISource/ui_base.h"
 #include "../__header/UISource/UI_Object.h"
+#include "../__header/UISource/MouseUtil.h"
 #include "../__header/UISource/UI_Widget.h"
 #include "../__header/UISource/uibutton.h"
 #include "../__header/UISource/UI_Box.h"
 #include "../__header/UISource/uimanager.h"
-#include "../__header/UISource/engine.h"
+#include "../__header/UISource/timer.h"
+#include "../__header/UISource/UI_Rect.h"
+#include "../__header/UISource/UI_RectItem.h"
+#include "../__header/UISource/UI_RectItemText.h"
 #include "../__header/UISource/font.h"
 #include "../__header/UISource/fontmgr.h"
+#include "../__header/UISource/TextureNode.h"
 #include "../__header/UISource/texturemgr.h"
-
+#include "../__header/UISource/engine.h"
 // 新的渲染抽象层
 #include "XmGuiRenderer.h"
 
@@ -216,7 +236,7 @@ namespace XM {
      * @return 版本字符串
      */
     inline const XmChar* GetVersionString() {
-        return XM_TEXT(XMGUI_VERSION_STRING);
+        return XMGUI_VERSION_STRING;
     }
 
     /**
@@ -313,10 +333,10 @@ namespace XM {
      * @param fullscreen 是否全屏
      * @return 初始化成功的渲染器指针，失败返回nullptr
      */
-    inline std::unique_ptr<IRenderer> CreateBestRenderer(
-        HWND hWnd, int width, int height, bool fullscreen = false) {
-        return XM::CreateBestRenderer(hWnd, width, height, fullscreen);
-    }
+    //inline std::unique_ptr<IRenderer> CreateBestRenderer(
+    //    HWND hWnd, int width, int height, bool fullscreen = false) {
+    //    return XM::CreateBestRenderer(hWnd, width, height, fullscreen);
+    //}
     
     /**
      * @brief 检查渲染器是否支持

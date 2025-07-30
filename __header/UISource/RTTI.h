@@ -4,6 +4,7 @@ file : XM_RTTI.h
 
 #ifndef H_XM_RTTI_H
 #define H_XM_RTTI_H
+#include <atlstr.h>
 
 namespace XM
 {
