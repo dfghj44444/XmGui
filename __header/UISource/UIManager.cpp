@@ -9,7 +9,7 @@ namespace XM
 {
 	XM_RTTI_CREATE_STATIC(UI_Manager, L"UI_Manager", UI_Box);
 	int UI_Manager::s_SuperID = 100;
-	UI_Object* UI_Manager::m_pFocus = NULL;
+	UI_Object* UI_Manager::m_pFocus = nullptr;
 	///////////////////////////////////////////////////////////////////////////
 	// ctor/dtor
 	UI_Manager::UI_Manager()
@@ -17,10 +17,10 @@ namespace XM
 		XM_RTTI_INIT_POINTER;
 
 		m_nDefaultControl	= 0;
-		m_pEventCallback	= 0;
-		m_pUserContext		= 0;
+		m_pEventCallback	= nullptr;
+		m_pUserContext		= nullptr;
 		m_nSuperID		= s_SuperID++;
-		m_pMouseOver		= 0;
+		m_pMouseOver		= nullptr;
 		m_bAlphaCkeck		= false;
 		//////////////////////////////////////////////////////////////////////////
 		g_pStaticEngine->addStatusUIManager(this);
@@ -84,7 +84,7 @@ namespace XM
 
 			// create class instance
             UI_Widget* pControl = createControl(strClassName);
-			if(pControl == 0)
+			if(pControl == nullptr)
 				return false;
 
 			// load class
@@ -135,7 +135,7 @@ namespace XM
 		{
 			m_pMouseOver->onMouseLeave();
 			m_pMouseOver->DelRef();
-			m_pMouseOver = 0;
+			m_pMouseOver = nullptr;
 		}
 		UI_Object* pControl = getMouseObject();
 		m_pMouseOver = pControl;		
@@ -157,7 +157,7 @@ namespace XM
 		{
 			m_pFocus->onFocusOut();
 			m_pFocus->DelRef();
-			m_pFocus = 0;
+			m_pFocus = nullptr;
 		}
 	}
 	void UI_Manager::focusDefaultControl()
@@ -174,7 +174,7 @@ namespace XM
 				{
 					m_pFocus->onFocusOut();
 					m_pFocus->DelRef();
-					m_pFocus = 0;
+					m_pFocus = nullptr;
 				}
 
 				m_pFocus = m_listControls[i];
@@ -192,7 +192,7 @@ namespace XM
 		{
 			m_pFocus->onFocusOut();
 			m_pFocus->DelRef();
-			m_pFocus = 0;
+			m_pFocus = nullptr;
 		}
 
 		if(pControl)
@@ -206,7 +206,7 @@ namespace XM
 	}
 	void UI_Manager::setNextFocus()
 	{
-		if(m_pFocus == 0)
+		if(m_pFocus == nullptr)
 		{
 			focusDefaultControl();
 			return;
@@ -229,7 +229,7 @@ namespace XM
 		{
 			m_pFocus->onFocusOut();
 			m_pFocus->DelRef();
-			m_pFocus = 0;
+			m_pFocus = nullptr;
 		}
 
 		m_pFocus = m_listControls[nIndex];
@@ -242,14 +242,14 @@ namespace XM
 		{
 			m_pFocus->onFocusOut();
 			m_pFocus->DelRef();
-			m_pFocus = 0;
+			m_pFocus = nullptr;
 		}
 
 		if(m_pMouseOver)
 		{
 			m_pMouseOver->onMouseLeave();
 			m_pMouseOver->DelRef();
-			m_pMouseOver = 0;
+			m_pMouseOver = nullptr;
 		}
 
 		int nSize = m_listControls.size();
@@ -406,7 +406,7 @@ namespace XM
 		{
 		case WM_LBUTTONDOWN:
 			{
-				if(pControl != 0 && pControl->getEnabled() == true)
+				if(pControl != nullptr && pControl->getEnabled() == true)
 				{				
 					//TODO: 如果按住标题，就可以拖动窗口
 				}
@@ -509,7 +509,7 @@ namespace XM
 						{
 							m_pFocus->onFocusOut();
 							m_pFocus->DelRef();
-							m_pFocus = 0;
+							m_pFocus = nullptr;
 						}
 					}
 				}
@@ -532,8 +532,8 @@ namespace XM
 	void UI_Manager::sendEvent(UINT nEvent, bool bTriggeredByUser, UI_Object* pControl)
 	{
 		XM_ASSERT(pControl);
-		if(pControl == 0)			return;
-		if(m_pEventCallback == 0)			return;
+		if(pControl == nullptr)			return;
+		if(m_pEventCallback == nullptr)			return;
 
 		m_pEventCallback(nEvent, pControl->getID(), pControl, m_pUserContext);
 	}
@@ -542,7 +542,7 @@ namespace XM
 
 	UI_Widget* createControl(const CStringW& name)
 	{
-		UI_Widget* pControl = NULL;
+		UI_Widget* pControl = nullptr;
 		if(name == UI_Widget::RTTI.getName()){
 			_NEW(pControl, UI_Widget);
 		}else if(name == UI_Button::RTTI.getName()){

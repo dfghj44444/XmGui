@@ -116,18 +116,18 @@ namespace XM
 	}
 	bool UI_Button::handleMouse(UI_Manager* pDialog, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
-		if((m_bVisible == false)||(m_bEnabled == false)||(pDialog == 0))
+		if((m_bVisible == false)||(m_bEnabled == false)||(pDialog == nullptr))
 		{
 			return false;
 		}
 
-		if(pDialog == 0)
+		if(pDialog == nullptr)
 		{
 			return false;
 		}
 
 		HWND hWnd = g_pStaticEngine->getHwnd();
-		if(hWnd == 0)
+		if(hWnd == nullptr)
 		{
 			return false;
 		}

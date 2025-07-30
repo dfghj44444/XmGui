@@ -15,7 +15,7 @@ namespace XM
 	{
 		XM_RTTI_INIT_POINTER;
 
-		m_pFontNode = 0;
+		m_pFontNode = nullptr;
 		if(setFont(_FONT_NAME_, 18, 0, FALSE) == false)
 		{
 			XM_ASSERT(0);
@@ -141,20 +141,20 @@ namespace XM
 
 	///////////////////////////////////////////////////////////////////////////
 	// render
-	void UI_RectItemText::renderItem(IDirect3DDevice9* pDevice)
+	void UI_RectItemText::render(IDirect3DDevice9* pDevice)
 	{
 		XM_ASSERT(pDevice);
-		if((pDevice == 0))	{return;}
+		if((pDevice == nullptr))	{return;}
 
-		IDirect3DTexture9* pTexture = 0;
+		IDirect3DTexture9* pTexture = nullptr;
 		if(m_pTexNode)
 			pTexture = m_pTexNode->getTexture();
 
-		if(m_pFontNode == 0)
+		if(m_pFontNode == nullptr)
 			return;
 
 		CFont* pFont = m_pFontNode->getFont();
-		if(pFont == 0)
+		if(pFont == nullptr)
 			return;
 
 		RECT rc;
@@ -219,7 +219,7 @@ namespace XM
 		{
 			renderString_Shadow(pFont, m_strTextData, -1, rc, m_dwTextFormat, m_colorShadow, m_nShadowOffsetX, m_nShadowOffsetY);
 		}
-		pFont->DrawTextW(0, m_strTextData, -1, &rc, m_dwTextFormat, m_colorFont);
+		pFont->DrawTextW(nullptr, m_strTextData, -1, &rc, m_dwTextFormat, m_colorFont);
 
         if (cache)
             g_FontRenderBatcher->EndCache();
@@ -294,13 +294,13 @@ namespace XM
 	}
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
-	bool UI_RectItemText::setFont(const WCHAR* strFontname, int nFontHeight, int nFontWeight, BOOL bItalic)
+	bool UI_RectItemText::setFont(const WCHAR* strFontName, int nFontHeight, int nFontWeight, BOOL bItalic)
 	{
 		_SAFE_DEREF(m_pFontNode);
 
 		XM::fontCreateParam* pFontParam;
 		_NEW(pFontParam, XM::fontCreateParam);
-		if(pFontParam == 0)
+		if(pFontParam == nullptr)
 		{
 			return false;
 		}
@@ -308,9 +308,9 @@ namespace XM
 		pFontParam->Weight = nFontWeight;
 		pFontParam->Italic = bItalic;
 
-		m_pFontNode	= g_pStaticFontMgr->getFontNode(strFontname, pFontParam);
+		m_pFontNode	= g_pStaticFontMgr->getFontNode(strFontName, pFontParam);
 
-		if(m_pFontNode == 0)
+		if(m_pFontNode == nullptr)
 		{
 			_DEL(pFontParam);
 			return false;

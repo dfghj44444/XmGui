@@ -24,7 +24,7 @@ namespace XM
 		D3DXMATRIX matInvView;
 		D3DVECTOR v;
 
-		D3DXMatrixInverse( &matInvView, NULL, &matView );
+		D3DXMatrixInverse( &matInvView, nullptr, &matView );
 
 		m_vRayPos.x	= matInvView._41;
 		m_vRayPos.y	= matInvView._42;
@@ -43,7 +43,7 @@ namespace XM
 		D3DXMATRIX matInvView;
 		D3DVECTOR v;
 
-		D3DXMatrixInverse( &matInvView, NULL, &matView );
+		D3DXMatrixInverse( &matInvView, nullptr, &matView );
 
 		v.x =  (  ( ( ( 2.0f * ( m_nMouseX ) ) / m_nScreenWidth  ) - 1 ) - matProj._31 ) / matProj._11;
 		v.y =  ( -( ( ( 2.0f * ( m_nMouseY ) ) / m_nScreenHeight ) - 1 ) - matProj._32 ) / matProj._22;
@@ -62,7 +62,7 @@ namespace XM
 		D3DXMATRIX matInvView;
 		D3DVECTOR v;
 
-		D3DXMatrixInverse( &matInvView, NULL, &matView );
+		D3DXMatrixInverse( &matInvView, nullptr, &matView );
 
 		m_vRayPos.x	= matInvView._41;
 		m_vRayPos.y	= matInvView._42;
@@ -81,7 +81,7 @@ namespace XM
 		D3DXMATRIX matInvView;
 		D3DVECTOR v;
 
-		D3DXMatrixInverse( &matInvView, NULL, &matView );
+		D3DXMatrixInverse( &matInvView, nullptr, &matView );
 
 		v.x =  (  ( ( ( 2.0f * ( m_nMouseX ) ) / m_nScreenWidth  ) - 1 ) - matProj._31 ) / matProj._11;
 		v.y =  ( -( ( ( 2.0f * ( m_nMouseY ) ) / m_nScreenHeight ) - 1 ) - matProj._32 ) / matProj._22;

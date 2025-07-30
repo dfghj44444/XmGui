@@ -41,23 +41,23 @@ namespace XM
 
 		texNode* pNode;
 		_NEW(pNode, texNode);
-		if(pNode == 0)
+		if(pNode == nullptr)
 		{
-			return 0;
+			return nullptr;
 		}
 
 		bResult = pNode->setResname(filename);
 		if(bResult == false)
 		{
 			_DEL(pNode);
-			return 0;
+			return nullptr;
 		}
 
 		bResult = pNode->setDevice(g_pStaticEngine->getDevice());
 		if(bResult == false)
 		{
 			_DEL(pNode);
-			return 0;
+			return nullptr;
 		}
 
 		g_pStaticEngine->addTexNode(filename.GetBuffer(), pNode);
@@ -77,21 +77,21 @@ namespace XM
 
 		texNode* pNode;
 		_NEW(pNode, texNode(pParam));
-		if(pNode == 0)
-			return 0;
+		if(pNode == nullptr)
+			return nullptr;
 
 		bResult = pNode->setResname(filename);
 		if(bResult == false)
 		{
 			_DEL(pNode);
-			return 0;
+			return nullptr;
 		}
 
 		bResult = pNode->setDevice(g_pStaticEngine->getDevice());
 		if(bResult == false)
 		{
 			_DEL(pNode);
-			return 0;
+			return nullptr;
 		}
 
 		g_pStaticEngine->addTexNode(filename.GetBuffer(), pNode);

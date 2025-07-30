@@ -66,7 +66,7 @@ namespace XM
 
             // create class instance
             UI_Widget* pControl = createControl(strClassName);
-            if(pControl == NULL)          return false;
+            if(pControl == nullptr)          return false;
             // load class
             if(!pControl->loadFile(rStream)) 
                 return false;
@@ -123,7 +123,7 @@ namespace XM
     UI_Object* UI_Box::hitTest(int nMouseX, int nMouseY, float& zDist)
     {
         float closerDist = 0.f;
-        UI_Object* pHitUI = NULL;
+        UI_Object* pHitUI = nullptr;
 
         int nSize = m_listControls.size();
         for(int i = 0; i < nSize; ++i)
@@ -157,7 +157,7 @@ namespace XM
             }
         }
 
-        return NULL;
+        return nullptr;
     }
 
 	UI_Object* UI_Box::getMouseObject()

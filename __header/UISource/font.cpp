@@ -5,16 +5,16 @@
 #define INVALID_INDEX (0xFFFFFFFF)
 #define TabWidthInSpaces (4)
 
-static LPDIRECT3DDEVICE9 s_pD3DDevice = NULL;
+static LPDIRECT3DDEVICE9 s_pD3DDevice = nullptr;
 static unsigned int s_FontCount = 0;
-static HDC s_FontHDC = NULL;
-static HBITMAP s_FontBMP = NULL;
+static HDC s_FontHDC = nullptr;
+static HBITMAP s_FontBMP = nullptr;
 
-CFontRenderBatcher* g_FontRenderBatcher = NULL;
+CFontRenderBatcher* g_FontRenderBatcher = nullptr;
 
 CFontTexture::CFontTexture()
     :m_bDirty(true)
-    ,m_pD3DTexture(NULL)
+    ,m_pD3DTexture(nullptr)
 {
 }
 
@@ -27,14 +27,14 @@ IDirect3DTexture9* CFontTexture::GetD3DTexture()
 {
     if(m_bDirty)
     {
-        if(m_pD3DTexture == NULL)
+        if(m_pD3DTexture == nullptr)
         {
-            HRESULT ret = s_pD3DDevice->CreateTexture(FONT_TEXTURE_SIZE, FONT_TEXTURE_SIZE, 1, 0, D3DFMT_A8, D3DPOOL_MANAGED, &m_pD3DTexture, NULL);
+            HRESULT ret = s_pD3DDevice->CreateTexture(FONT_TEXTURE_SIZE, FONT_TEXTURE_SIZE, 1, 0, D3DFMT_A8, D3DPOOL_MANAGED, &m_pD3DTexture, nullptr);
             XM_ASSERT(ret == D3D_OK && m_pD3DTexture != NULL);
         }
 
         D3DLOCKED_RECT rect;
-        m_pD3DTexture->LockRect(0, &rect, NULL, D3DLOCK_DISCARD);
+        m_pD3DTexture->LockRect(0, &rect, nullptr, D3DLOCK_DISCARD);
         memcpy(rect.pBits, m_BMP, sizeof(m_BMP));
         m_pD3DTexture->UnlockRect(0);
 
@@ -178,7 +178,7 @@ INT CFont::DrawTextA(LPD3DXSPRITE pSprite, LPCSTR pString, INT Count, LPRECT pRe
 
     int ret = MultiByteToWideChar(936, 0, pString, Count, wstr, ARRAY_SIZE(wstr));
     if(ret > 0)
-        return DrawTextW(NULL, wstr, ret, pRect, Format, Color);
+        return DrawTextW(nullptr, wstr, ret, pRect, Format, Color);
 
     return 0;
 }
@@ -467,7 +467,7 @@ void CFont::WrapString(const wchar_t *str, unsigned int n, unsigned int width, s
 
 unsigned int CFont::GetBreakPos(const wchar_t *str, unsigned int n, unsigned int width, bool breakOnWhitespace)
 {
-    if (str == NULL || str[0] == L'\0' || n == 0)
+    if (str == nullptr || str[0] == L'\0' || n == 0)
         return 0;
 
     if (n == INVALID_LEN)
@@ -507,7 +507,7 @@ unsigned int CFont::GetBreakPos(const wchar_t *str, unsigned int n, unsigned int
 
 unsigned int CFont::GetStrWidth(const wchar_t *str, unsigned int n)
 {
-    if (str == NULL || str[0] == L'\0' || n == 0)
+    if (str == nullptr || str[0] == L'\0' || n == 0)
         return 0;
 
     if (n == INVALID_LEN)
@@ -540,7 +540,7 @@ void CFont::Init()
 {
     s_pD3DDevice = g_pStaticDevice;
 
-    s_FontHDC = CreateCompatibleDC(NULL);
+    s_FontHDC = CreateCompatibleDC(nullptr);
     s_FontBMP = CreateCompatibleBitmap(s_FontHDC, 256, 256);
 
     SelectObject(s_FontHDC, s_FontBMP);
@@ -553,10 +553,10 @@ void CFont::Init()
 void CFont::Destroy()
 {
     DeleteObject(s_FontBMP);
-    s_FontBMP = NULL;
+    s_FontBMP = nullptr;
 
     DeleteObject(s_FontHDC);
-    s_FontHDC = NULL;
+    s_FontHDC = nullptr;
 
     _SAFE_DELETE(g_FontRenderBatcher);
 }

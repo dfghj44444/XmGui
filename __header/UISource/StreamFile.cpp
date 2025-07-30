@@ -12,7 +12,7 @@ namespace XM
 	// ctor/dtor
 	IStreamFile::IStreamFile()
 	{
-		m_hFile			= NULL;
+		m_hFile			= nullptr;
 		m_bReadMode		= false;
 		m_bWriteMode	= false;
 	}
@@ -28,17 +28,17 @@ namespace XM
 	int IStreamFile::read(int bytes, void* pBuffer)
 	{
 		XM_ASSERT(pBuffer);
-		if(pBuffer == 0)
+		if(pBuffer == nullptr)
 			return 0;
 
 		if(m_bReadMode == false)
 			return 0;
 
-		if(m_hFile == 0) 
+		if(m_hFile == nullptr) 
 			return 0;
 
 		DWORD nCount;
-		if(ReadFile(m_hFile, pBuffer, bytes, &nCount, NULL) == FALSE)
+		if(ReadFile(m_hFile, pBuffer, bytes, &nCount, nullptr) == FALSE)
 			return 0;
 
 		return nCount;
@@ -46,16 +46,16 @@ namespace XM
 	int IStreamFile::write(int bytes, const void* pBuffer)
 	{
 		XM_ASSERT(pBuffer);
-		if(pBuffer == 0)
+		if(pBuffer == nullptr)
 			return 0;
 
 		if(m_bWriteMode == false)
 			return 0;
 
-		if(m_hFile == 0) return 0;
+		if(m_hFile == nullptr) return 0;
 
 		DWORD nCount;
-		if(WriteFile(m_hFile, pBuffer, bytes, &nCount, NULL) == FALSE)
+		if(WriteFile(m_hFile, pBuffer, bytes, &nCount, nullptr) == FALSE)
 			return 0;
 
 		return nCount;
@@ -88,7 +88,7 @@ namespace XM
         closeFile();
 
 		TCHAR* pszFileName = filename.GetBuffer();
-		m_hFile = CreateFile( pszFileName, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL );
+		m_hFile = CreateFile( pszFileName, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
         if(m_hFile != INVALID_HANDLE_VALUE)
         {
             m_bReadMode = true;
@@ -103,7 +103,7 @@ namespace XM
 			for(int i = 0; i<nSize; ++i)
 			{
 				CStringW strComplete = (*pathList)[i] + _T('\\') + pszFileName;
-				m_hFile = CreateFile( strComplete, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+				m_hFile = CreateFile( strComplete, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
 				if(m_hFile != INVALID_HANDLE_VALUE)
 				{
 					m_bReadMode = true;
@@ -121,7 +121,7 @@ namespace XM
 	{
 		if(m_hFile)		{closeFile();}
 
-		m_hFile = CreateFileA(filename, GENERIC_WRITE|GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+		m_hFile = CreateFileA(filename, GENERIC_WRITE|GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
 		if(m_hFile == INVALID_HANDLE_VALUE) {return false;}
 
 		m_bReadMode = true;
@@ -132,7 +132,7 @@ namespace XM
 	{
 		if(m_hFile)		{closeFile();}
 
-		m_hFile = CreateFileA(filename.c_str(), GENERIC_WRITE|GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+		m_hFile = CreateFileA(filename.c_str(), GENERIC_WRITE|GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
 		if(m_hFile == INVALID_HANDLE_VALUE) {return false;}
 
 		m_bReadMode = true;
@@ -143,7 +143,7 @@ namespace XM
 	{
 		if(m_hFile)		{closeFile();}
 
-		m_hFile = CreateFileW(filename, GENERIC_WRITE|GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+		m_hFile = CreateFileW(filename, GENERIC_WRITE|GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
 		if(m_hFile == INVALID_HANDLE_VALUE) {return false;}
 
 		m_bReadMode = true;
@@ -155,12 +155,12 @@ namespace XM
 	{
 		if(m_hFile)		{closeFile();}
 		XM_ASSERT(filename);
-		if(filename == 0)
+		if(filename == nullptr)
 		{
 			return false;
 		}
 
-		m_hFile = CreateFileA(filename, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		m_hFile = CreateFileA(filename, GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
 		if(m_hFile == INVALID_HANDLE_VALUE) {return false;}
 
 		m_bReadMode = false;
@@ -171,7 +171,7 @@ namespace XM
 	{
 		if(m_hFile)		{closeFile();}
 
-		m_hFile = CreateFileA(filename.c_str(), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		m_hFile = CreateFileA(filename.c_str(), GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
 		if(m_hFile == INVALID_HANDLE_VALUE) {return false;}
 
 		m_bReadMode = false;
@@ -182,7 +182,7 @@ namespace XM
 	{
 		if(m_hFile)		{closeFile();}
 
-		m_hFile = CreateFileW(filename, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		m_hFile = CreateFileW(filename, GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
 		if(m_hFile == INVALID_HANDLE_VALUE) {return false;}
 
 		m_bReadMode = false;

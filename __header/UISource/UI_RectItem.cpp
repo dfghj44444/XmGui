@@ -16,7 +16,7 @@ namespace XM
 	{
 		XM_RTTI_INIT_POINTER;
 
-		m_pTexNode				= 0;
+		m_pTexNode				= nullptr;
 
 		// hit test
 		m_bUseHitTest			= true;
@@ -84,7 +84,7 @@ namespace XM
 			CStringW strTexture;
 			ISTREAM_READSTRING(rStream, &strTexture) ;
 			m_pTexNode = g_pStaticTexMgr->getTextureNode(strTexture);
-			if(m_pTexNode != 0)
+			if(m_pTexNode != nullptr)
 			{
 				m_pTexNode->AddRef();
 			}
@@ -155,11 +155,11 @@ namespace XM
 	{
 		XM_ASSERT(pDevice);
 
-		if((pDevice == 0)||(m_pTexNode == 0))
+		if((pDevice == nullptr)||(m_pTexNode == nullptr))
 			return;
 
 		IDirect3DTexture9* pTexture = m_pTexNode->getTexture();
-		if(pTexture == 0)	
+		if(pTexture == nullptr)	
 			return;
 
 		pDevice->SetTexture(0, pTexture);
@@ -221,7 +221,7 @@ namespace XM
 		{
 			return m_pTexNode->getTexture();
 		}
-		return 0;
+		return nullptr;
 	}
 
 	void UI_RectItem::setAlpha( const int& nAl )
@@ -352,7 +352,7 @@ namespace XM
 	void UI_RectItem::setTexCoords(const float* pTexCoords)
 	{
 		XM_ASSERT(pTexCoords);
-		if(pTexCoords == 0)
+		if(pTexCoords == nullptr)
 		{
 			return;
 		}
@@ -362,7 +362,7 @@ namespace XM
 	void UI_RectItem::getTexCoords(float* pTexCoordsIn)
 	{
 		XM_ASSERT(pTexCoordsIn);
-		if(pTexCoordsIn == 0)
+		if(pTexCoordsIn == nullptr)
 		{
 			return;
 		}

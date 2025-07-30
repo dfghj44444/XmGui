@@ -13,7 +13,7 @@ namespace XM
 	bool IStream_Read(IStream& rStream, void* pRead, int size)
 	{
 		XM_ASSERT(pRead);
-		if(pRead == 0)
+		if(pRead == nullptr)
 		{
 			return false;
 		}
@@ -28,7 +28,7 @@ namespace XM
 	bool IStream_ReadBool(IStream& rStream, bool* pOut)
 	{
 		XM_ASSERT(pOut);
-		if(pOut == 0)
+		if(pOut == nullptr)
 		{
 			return false;
 		}
@@ -43,7 +43,7 @@ namespace XM
 	bool IStream_ReadBOOL(IStream& rStream, BOOL* pOut)
 	{
 		XM_ASSERT(pOut);
-		if(pOut == 0)
+		if(pOut == nullptr)
 		{
 			return false;
 		}
@@ -58,7 +58,7 @@ namespace XM
 	bool IStream_ReadInt(IStream& rStream, int* pOut)
 	{
 		XM_ASSERT(pOut);
-		if(pOut == 0)
+		if(pOut == nullptr)
 		{
 			return false;
 		}
@@ -73,7 +73,7 @@ namespace XM
 	bool IStream_ReadUint(IStream& rStream, unsigned int* pOut)
 	{
 		XM_ASSERT(pOut);
-		if(pOut == 0)
+		if(pOut == nullptr)
 		{
 			return false;
 		}
@@ -88,7 +88,7 @@ namespace XM
 	bool IStream_ReadUShort(IStream& rStream, unsigned short* pOut)
 	{
 		XM_ASSERT(pOut);
-		if(pOut == 0)
+		if(pOut == nullptr)
 		{
 			return false;
 		}
@@ -103,7 +103,7 @@ namespace XM
 	bool IStream_ReadULong(IStream& rStream, unsigned long* pOut)
 	{
 		XM_ASSERT(pOut);
-		if(pOut == 0)
+		if(pOut == nullptr)
 		{
 			return false;
 		}
@@ -118,7 +118,7 @@ namespace XM
 	bool IStream_ReadFloat(IStream& rStream, float* pOut)
 	{
 		XM_ASSERT(pOut);
-		if(pOut == 0)
+		if(pOut == nullptr)
 		{
 			return false;
 		}
@@ -133,7 +133,7 @@ namespace XM
 	bool IStream_ReadString(IStream& rStream, CStringW* pOut)
 	{
 		XM_ASSERT(pOut);
-		if(pOut == 0)
+		if(pOut == nullptr)
 		{
 			return false;
 		}
@@ -148,7 +148,7 @@ namespace XM
 		// create read buffer
 		WCHAR* pBuf = new WCHAR[nSize+1];
 		XM_ASSERT(pBuf);
-		if(pBuf == 0)
+		if(pBuf == nullptr)
 		{
 			return false;
 		}
@@ -173,7 +173,7 @@ namespace XM
 	bool IStream_ReadVec2(IStream& rStream, D3DXVECTOR2* pOut)
 	{
 		XM_ASSERT(pOut);
-		if(pOut == 0)
+		if(pOut == nullptr)
 		{
 			return false;
 		}
@@ -188,7 +188,7 @@ namespace XM
 	bool IStream_ReadVec3(IStream& rStream, D3DXVECTOR3* pOut)
 	{
 		XM_ASSERT(pOut);
-		if(pOut == 0)
+		if(pOut == nullptr)
 		{
 			return false;
 		}
@@ -203,7 +203,7 @@ namespace XM
 	bool IStream_ReadVec4(IStream& rStream, D3DXVECTOR4* pOut)
 	{
 		XM_ASSERT(pOut);
-		if(pOut == 0)
+		if(pOut == nullptr)
 		{
 			return false;
 		}
@@ -218,7 +218,7 @@ namespace XM
 	bool IStream_ReadMatrix(IStream& rStream, D3DXMATRIX* pOut)
 	{
 		XM_ASSERT(pOut);
-		if(pOut == 0)
+		if(pOut == nullptr)
 		{
 			return false;
 		}
@@ -234,7 +234,7 @@ namespace XM
 	bool IStream_Write(IStream& rStream, void* pWrite, int size)
 	{
 		XM_ASSERT(pWrite);
-		if(pWrite == 0)
+		if(pWrite == nullptr)
 		{
 			return false;
 		}

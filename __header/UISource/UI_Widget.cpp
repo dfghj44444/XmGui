@@ -216,7 +216,7 @@ namespace XM
 	bool UI_Widget::addRect(UI_Rect* pRect)
 	{
 		XM_ASSERT(pRect);
-		if(pRect == 0)
+		if(pRect == nullptr)
 		{
 			return false;
 		}
@@ -234,7 +234,7 @@ namespace XM
 	bool UI_Widget::removeRect(UI_Rect* pRect)
 	{
 		XM_ASSERT(pRect);
-		if(pRect == 0)
+		if(pRect == nullptr)
 		{
 			return false;
 		}
@@ -252,7 +252,7 @@ namespace XM
 	int UI_Widget::findRect(UI_Rect* pRect)
 	{
 		XM_ASSERT(pRect);
-		if(pRect == 0)
+		if(pRect == nullptr)
 		{
 			return -1;
 		}
@@ -270,7 +270,7 @@ namespace XM
 				return m_listRect[nOrdinal];
 			}
 		}
-		return 0;
+		return nullptr;
 	}
 	// rects
 	///////////////////////////////////////////////////////////////////////////
@@ -303,7 +303,7 @@ namespace XM
 		{
 			return pRect->getItem(cCS);
 		}
-		return 0;
+		return nullptr;
 	}	
 	// rect item
 	///////////////////////////////////////////////////////////////////////////
@@ -355,7 +355,7 @@ namespace XM
 		for(int i = 0; i<nSize; ++i)
 		{
 			_NEW(pRect, UI_Rect);
-			if(pRect == NULL)
+			if(pRect == nullptr)
 				return false;
 
 			if(pRect->loadFile(rStream) == false) return false;
@@ -390,7 +390,7 @@ namespace XM
 	UI_Object* UI_Widget::hitTest(int nMouseX, int nMouseY,OUT float& pZOut)
 	{
 		if (!m_bVisible || !m_bEnabled || !m_bHitTest)
-			return NULL;
+			return nullptr;
 
 		int nSize = m_listRect.size();
 		for(int i = 0; i<nSize; ++i)
@@ -399,7 +399,7 @@ namespace XM
 				return this;
 		}
 
-		return NULL;
+		return nullptr;
 	}
 	// hit test
 	///////////////////////////////////////////////////////////////////////////

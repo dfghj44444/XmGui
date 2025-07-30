@@ -21,7 +21,7 @@ namespace XM
 		m_controlState = SCT_NORMAL;
 		for(int i = 0; i<SCT_STATUS_COUNT; ++i)
 		{
-			m_Items[i] = 0;
+			m_Items[i] = nullptr;
 		}
 
 		m_uRectID = 0;
@@ -76,7 +76,7 @@ namespace XM
 				CStringW strClassName;
 				ISTREAM_READSTRING(rStream, &strClassName);
 
-				UI_RectItem* pRectItem = NULL;
+				UI_RectItem* pRectItem = nullptr;
 
 				// UI_RectItem
 				if(strClassName == UI_RectItem::RTTI.getName())

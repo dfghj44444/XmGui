@@ -39,7 +39,7 @@ namespace XM
 		bool					m_bNumberCheck;
 
 	protected:
-		virtual void			renderItem(IDirect3DDevice9* pDevice);
+        void			render(IDirect3DDevice9* pDevice) override;
 
 	public:
 

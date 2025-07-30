@@ -14,9 +14,9 @@ namespace XM
 	// ctor/dtor
 	fontNode::fontNode()
 	{
-		m_pDevice			= 0;
-		m_pFont				= 0;
-		m_pFontCreationParam= 0;
+		m_pDevice			= nullptr;
+		m_pFont				= nullptr;
+		m_pFontCreationParam= nullptr;
 
 		fontCreateParam* param;
 		_NEW(param,fontCreateParam);
@@ -27,9 +27,9 @@ namespace XM
 	{
 		XM_RTTI_INIT_POINTER;
 
-		m_pDevice			= 0;
-		m_pFont				= 0;
-		m_pFontCreationParam= 0;
+		m_pDevice			= nullptr;
+		m_pFont				= nullptr;
+		m_pFontCreationParam= nullptr;
 
 		setCreationParam(pParam);
 		XM_ASSERT(m_pFontCreationParam);
@@ -65,14 +65,14 @@ namespace XM
 		XM_ASSERT(m_pDevice);
 		XM_ASSERT(m_pFontCreationParam);
 		XM_ASSERT(m_strResname.GetLength() > 0);
-		if((m_pDevice == 0)||(m_pFontCreationParam == 0)||(m_strResname.GetLength() <= 0))
+		if((m_pDevice == nullptr)||(m_pFontCreationParam == nullptr)||(m_strResname.GetLength() <= 0))
 		{
 			return false;
 		}
 
         m_pFont = g_pStaticFontMgr->create(m_strResname, m_pFontCreationParam);
 
-		if(m_pFont == NULL)
+		if(m_pFont == nullptr)
 		{
 			return false;
 		}
@@ -105,7 +105,7 @@ namespace XM
 	bool fontNode::onResetDevice(IDirect3DDevice9* pDevice)
 	{
 		XM_ASSERT(pDevice);
-		if(pDevice == 0)
+		if(pDevice == nullptr)
 		{
 			return false;
 		}
@@ -127,7 +127,7 @@ namespace XM
 	void fontNode::onDestroyDevice()
 	{
 		_SAFE_RELEASE(m_pFont);
-		m_pDevice = 0;
+		m_pDevice = nullptr;
 	}
 
 } // namespace XM

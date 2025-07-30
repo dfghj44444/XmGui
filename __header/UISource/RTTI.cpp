@@ -9,7 +9,7 @@ namespace XM
 {
 	RTTIClass::RTTIClass()
 	{
-		m_pSuper		= 0;
+		m_pSuper		= nullptr;
 		setName("XM basetype");
 	}
 	RTTIClass::RTTIClass(const WCHAR* strName, RTTIClass* pSuper)

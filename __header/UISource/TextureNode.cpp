@@ -10,9 +10,9 @@ namespace XM
 	// ctor/dtor
 	texNode::texNode()
 	{
-		m_pDevice			= NULL;
-		m_pTexture			= NULL;
-		m_pTexCreationParam	= NULL;
+		m_pDevice			= nullptr;
+		m_pTexture			= nullptr;
+		m_pTexCreationParam	= nullptr;
 
 		texCreateParam* param;
 		_NEW(param,texCreateParam);
@@ -23,9 +23,9 @@ namespace XM
 	{
 		XM_ASSERT(pParam);
 
-		m_pDevice			= 0;
-		m_pTexture			= 0;
-		m_pTexCreationParam	= 0;
+		m_pDevice			= nullptr;
+		m_pTexture			= nullptr;
+		m_pTexCreationParam	= nullptr;
 
 		setTextureCreationParam(pParam);
 		XM_ASSERT(m_pTexCreationParam);
@@ -69,7 +69,7 @@ namespace XM
 		XM_ASSERT(m_pDevice);
 		XM_ASSERT(m_pTexCreationParam);
 		XM_ASSERT(m_strResname.GetLength() > 0);
-		if((m_pDevice == 0)||(m_pTexCreationParam == 0)||(m_strResname.GetLength() <= 0))
+		if((m_pDevice == nullptr)||(m_pTexCreationParam == nullptr)||(m_strResname.GetLength() <= 0))
 		{
 			return false;
 		}
@@ -93,8 +93,8 @@ namespace XM
 			m_pTexCreationParam->Filter,				
 			m_pTexCreationParam->MipFilter,				
 			m_pTexCreationParam->ColorKey,				
-			&m_texInfo,									
-			NULL,
+			&m_texInfo,
+            nullptr,
 			&m_pTexture);								
 
 //		if ( fLock ) UNLOCK_D3DDEVICE();
@@ -121,7 +121,7 @@ namespace XM
 						m_pTexCreationParam->MipFilter,
 						m_pTexCreationParam->ColorKey,
 						&m_texInfo,
-						NULL,
+                        nullptr,
 						&m_pTexture);
 
 					if(SUCCEEDED(hr))
@@ -175,7 +175,7 @@ namespace XM
 	void texNode::onDestroyDevice()
 	{
 		_SAFE_RELEASE(m_pTexture);
-		m_pDevice = 0;
+		m_pDevice = nullptr;
 	}
 
 } // namespace XM

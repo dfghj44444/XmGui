@@ -332,7 +332,7 @@ bool CreateUI()
             {
                 pTextItem->setTextData(L"确定");
                 pTextItem->setFontColor(XM::MakeColor(255, 255, 255)); // 白色文字
-                pTextItem->setBackgroundColor(XM::MakeColor(0, 120, 215)); // 蓝色背景
+                pTextItem->setBackgroundColor(XM::MakeColor(100, 120, 215)); // 蓝色背景
                 pTextItem->setUseBackgroundColor(true);
                 pTextItem->setDrawFormat(DT_CENTER | DT_VCENTER | DT_SINGLELINE);
                 
@@ -340,7 +340,7 @@ bool CreateUI()
                 pTextItem->setFont(L"Arial", 16, FW_NORMAL, false);
                 
                 // 设置按钮尺寸
-               // pTextItem->setSize(D3DXVECTOR3(100, 30, 0)); // 宽度100，高度30
+                pTextItem->setSize(D3DXVECTOR3(100, 30, 0)); // 宽度100，高度30
                 
                 // 将文本项添加到矩形区域
                 pRect->setItem(XM::SCT_NORMAL, pTextItem);
@@ -374,7 +374,7 @@ bool CreateUI()
                 pTextItem->setFont(L"Arial", 16, FW_NORMAL, false);
                 
                 // 设置按钮尺寸
-             //   pTextItem->setSize(D3DXVECTOR3(100, 30, 0)); // 宽度100，高度30
+                pTextItem->setSize(D3DXVECTOR3(100, 30, 0)); // 宽度100，高度30
                 
                 // 将文本项添加到矩形区域
                 pRect->setItem(XM::SCT_NORMAL, pTextItem);
@@ -408,7 +408,7 @@ bool CreateUI()
                 pTextItem->setFont(L"Arial", 16, FW_NORMAL, false);
                 
                 // 设置按钮尺寸
-             //   pTextItem->setSize(D3DXVECTOR3(100, 30, 0)); // 宽度100，高度30
+                pTextItem->setSize(D3DXVECTOR3(100, 30, 0)); // 宽度100，高度30
                 
                 // 将文本项添加到矩形区域
                 pRect->setItem(XM::SCT_NORMAL, pTextItem);

@@ -9,7 +9,7 @@ namespace XM
 {
 	resNode::resNode()
 	{
-		m_pDevice	= 0;
+		m_pDevice	= nullptr;
 		m_nGroupID	= 0;
 
 		g_pStaticEngine->addDeviceData(this);

@@ -13,7 +13,7 @@ namespace XM
 
 	void renderRect_VTXTYPE_2D_COLOR(const RECT& rRC, D3DCOLOR cColor, float z, IDirect3DDevice9* pd3dDevice)
 	{
-		if(pd3dDevice == 0)
+		if(pd3dDevice == nullptr)
 		{
 			return;
 		}
@@ -39,13 +39,13 @@ namespace XM
 		colorRect[1].color = cColor;
 		colorRect[2].color = cColor;
 		colorRect[3].color = cColor;
-		pd3dDevice->SetTexture(0, 0);
+		pd3dDevice->SetTexture(0, nullptr);
 		pd3dDevice->SetFVF(VTXTYPE_2D_COLOR::FVF);
 		pd3dDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, colorRect, sizeof(VTXTYPE_2D_COLOR));
 	}
 	void renderRect_VTXTYPE_2D_COLOR_RoomMake(const RECT& rRC, D3DCOLOR cColor, float z, IDirect3DDevice9* pd3dDevice)
 	{
-		if(pd3dDevice == 0)
+		if(pd3dDevice == nullptr)
 		{
 			return;
 		}
@@ -71,14 +71,14 @@ namespace XM
 		colorRect[1].color = cColor;
 		colorRect[2].color = cColor;
 		colorRect[3].color = cColor;
-		pd3dDevice->SetTexture(0, 0);
+		pd3dDevice->SetTexture(0, nullptr);
 		pd3dDevice->SetFVF(VTXTYPE_2D_COLOR::FVF);
 		pd3dDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, colorRect, sizeof(VTXTYPE_2D_COLOR));
 	}
 
 	void renderString_Outline(CFont* pFont, CStringW& strOut, int nCount, RECT& rcRect, DWORD dwFmt, D3DCOLOR cColor)
 	{
-		if(pFont == 0)	{return;}
+		if(pFont == nullptr)	{return;}
 
 		RECT rcRender = rcRect;
 		int nShift[] = {-1, 0, 1, 0, 0, 1, 0, -1, 1, 1, -1, -1, 1, -1, -1, 1};
@@ -86,23 +86,23 @@ namespace XM
 		for(int i = 0; i<8; ++i)
 		{
 			OffsetRect(&rcRender, nShift[i*2], nShift[i*2 + 1]);
-			pFont->DrawTextW(0, strOut, nCount, &rcRender, dwFmt, cColor);
+			pFont->DrawTextW(nullptr, strOut, nCount, &rcRender, dwFmt, cColor);
 			OffsetRect(&rcRender, -nShift[i*2], -nShift[i*2 + 1]);
 		}
 	}
 	void renderString_Shadow(CFont* pFont, CStringW& strOut, int nCount, RECT& rcRect, DWORD dwFmt, D3DCOLOR cColor, int nOffsetX, int nOffsetY)
 	{
-		if(pFont == 0)	{return;}
+		if(pFont == nullptr)	{return;}
 		RECT rcRender = rcRect;
 		rcRender.left	+= nOffsetX;
 		rcRender.right	+= nOffsetX;
 		rcRender.top	+= nOffsetY;
 		rcRender.bottom	+= nOffsetY;
-		pFont->DrawTextW(0, strOut, nCount, &rcRender, dwFmt, cColor);
+		pFont->DrawTextW(nullptr, strOut, nCount, &rcRender, dwFmt, cColor);
 	}
 	void renderString_OutlineA(CFont* pFont, char* strOut, int nCount, RECT& rcRect, DWORD dwFmt, D3DCOLOR cColor)
 	{
-		if(pFont == 0 || strOut == 0)	{return;}
+		if(pFont == nullptr || strOut == nullptr)	{return;}
 
 		RECT rcRender = rcRect;
 		int nShift[] = {-1, 0, 1, 0, 0, 1, 0, -1, 1, 1, -1, -1, 1, -1, -1, 1};
@@ -110,19 +110,19 @@ namespace XM
 		for(int i = 0; i<8; ++i)
 		{
 			OffsetRect(&rcRender, nShift[i*2], nShift[i*2 + 1]);
-			pFont->DrawTextA(0, strOut, nCount, &rcRender, dwFmt, cColor);
+			pFont->DrawTextA(nullptr, strOut, nCount, &rcRender, dwFmt, cColor);
 			OffsetRect(&rcRender, -nShift[i*2], -nShift[i*2 + 1]);
 		}
 	}
 	void renderString_ShadowA(CFont* pFont, char* strOut, int nCount, RECT& rcRect, DWORD dwFmt, D3DCOLOR cColor, int nOffsetX, int nOffsetY)
 	{
-		if(pFont == 0 || strOut == 0)	{return;}
+		if(pFont == nullptr || strOut == nullptr)	{return;}
 
 		RECT rcRender = rcRect;
 		rcRender.left	+= nOffsetX;
 		rcRender.right	+= nOffsetX;
 		rcRender.top	+= nOffsetY;
 		rcRender.bottom	+= nOffsetY;
-		pFont->DrawTextA(0, strOut, nCount, &rcRender, dwFmt, cColor);
+		pFont->DrawTextA(nullptr, strOut, nCount, &rcRender, dwFmt, cColor);
 	}
 }

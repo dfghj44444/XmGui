@@ -22,18 +22,18 @@ namespace XM
 	{
 		fontNode* pNode;
 		_NEW(pNode, fontNode(pParam));
-		if(!pNode )			return NULL;
+		if(!pNode )			return nullptr;
 
 		bool bResult = pNode->setResname(filename);
 		if(bResult == false){
 			_DEL(pNode);
-			return NULL;
+			return nullptr;
 		}
 
 		bResult = pNode->setDevice(g_pStaticEngine->getDevice());
 		if(bResult == false){
 			_DEL(pNode);
-			return NULL;
+			return nullptr;
 		}
 
 		return pNode;
@@ -64,7 +64,7 @@ namespace XM
 
     CFont* fontMgr::create(LPCWSTR pFacename, const XM::fontCreateParam* param)
     {
-        CFont* pFont = NULL;
+        CFont* pFont = nullptr;
 
         int height = param->Height;
         int weight = param->Weight;

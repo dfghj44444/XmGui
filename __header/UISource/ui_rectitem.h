@@ -49,14 +49,14 @@ namespace XM
 
 		// ctor/dtor
 		UI_RectItem();
-		virtual ~UI_RectItem();
+        ~UI_RectItem() override;
 
 		// serialize
-		virtual bool			saveFile(IStream& rStream);
-		virtual bool			loadFile(IStream& rStream);
+        bool			saveFile(IStream& rStream) override;
+        bool			loadFile(IStream& rStream) override;
 
-		virtual void			frameMove(DWORD dwElapsedTime);
-		void					render(IDirect3DDevice9* pDevice);
+        void			frameMove(DWORD dwElapsedTime) override;
+		void					render(IDirect3DDevice9* pDevice) override;
 
 		virtual bool hitTest(int mouseX, int mouseY, float& zOut);
 
